@@ -1,13 +1,12 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { theme } from 'common/@mui';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
-import { ThemeProvider } from '@material-ui/styles';
-import Layout from 'Layout';
-import { RenderRoutes } from 'Routes';
-import { StoreContextProvider } from 'Store/StoreContext';
-
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { theme } from "common/@mui";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
+import { ThemeProvider } from "@material-ui/styles";
+import Layout from "Layout";
+import { RenderRoutes } from "Routes";
+import { StoreContextProvider } from "Store/StoreContext";
 
 function App() {
   return (
@@ -19,12 +18,12 @@ function App() {
           </Layout>
         </Router>
       </StoreContextProvider>
-    </ThemeProvider >
-
+    </ThemeProvider>
   );
 }
 
-{/* <Route exact path='/clothingstore/' component={HomePage}></Route>
+{
+  /* <Route exact path='/clothingstore/' component={HomePage}></Route>
         <Route exact path='/clothingstore/Login' component={Login}></Route>
         <Route exact path='/clothingstore/Cart' component={Cart}></Route>
         <Route exact path='/clothingstore/Checkout' component={Checkout}></Route>
@@ -34,7 +33,7 @@ function App() {
         <Route exact path='/clothingstore/Wishlist' component={Wishlist}></Route>
         <Route exact path='/clothingstore/:Category' component={Catalog}></Route>
         <Route exact path='/clothingstore/:Category/:SubCategory' component={Catalog}></Route>
-        <Route component={ErrorPage}></Route> */}
-
+        <Route component={ErrorPage}></Route> */
+}
 
 export default App;
