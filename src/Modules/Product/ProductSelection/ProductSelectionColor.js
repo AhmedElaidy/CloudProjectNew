@@ -3,7 +3,6 @@ import ButtonColor from "Components/Buttons/ButtonColor";
 import { Button } from "react-bootstrap";
 
 const ProductSelectionSize = ({ color, setColor }) => {
-  console.log("color is ", color);
   return (
     <div className="mt-3">
       <h4>Color</h4>

@@ -19,6 +19,7 @@
     "react-scripts": "4.0.2",
     "react-select": "^4.1.0",
     "react-slick": "^0.28.0",
+    "scss": "^0.2.4",
     "slick-carousel": "^1.8.1",
     "swiper": "^6.4.15",
     "web-vitals": "^1.1.0"

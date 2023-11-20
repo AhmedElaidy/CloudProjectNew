@@ -4,15 +4,16 @@ import ProductSelectionColor from "./ProductSelectionColor";
 import ButtonBlock from "Components/Buttons/ButtonBlock";
 import UseStore from "Store/StoreContext";
 import { withRouter } from "react-router-dom";
+import ProductSelectionText from "./ProductSelectionText";
+import { useEffect } from "react";
 
 const Product = (props) => {
   const classes = useStyles();
   const { current } = props;
-  const [prod, setProd] = useState(current);
+  const [prod, setProd] = useState({ ...current, text: "" });
   const { cart, setCart } = UseStore();
 
   const addToCart = () => {
-    console.log("prod is ", prod);
     setCart([prod, ...cart]);
     // localStorage.setItem('cart', cart)
     // console.log(localStorage.getItem('cart'))
@@ -25,11 +26,22 @@ const Product = (props) => {
     }));
   };
 
-  // console.log(localStorage.getItem('cart'))
+  const setText = (text) => {
+    setProd((prevProd) => ({
+      ...prevProd,
+      text,
+    }));
+  };
+
+  useEffect(()=>{
+console.log("prod is ", prod);
+  },[prod])
+
   return (
     <div className={classes.selection}>
       <h2 className={classes.title}>{current.name}</h2>
       <ProductSelectionColor color={prod.color} setColor={setColor} />
+      <ProductSelectionText shirtText={prod.text} setShirtText={setText} />
       <div className="mt-4 ">
         <div className={classes.buttonContainer}>
           <ButtonBlock
