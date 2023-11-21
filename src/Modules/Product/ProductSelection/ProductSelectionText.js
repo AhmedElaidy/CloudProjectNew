@@ -6,21 +6,40 @@ const ProductSelectionText = ({ shirtText, setShirtText }) => {
 
   const handleOnSumbit = (e) => {
     e.preventDefault();
-    if(inputText.trim()){
+    if (inputText.trim()) {
       setShirtText(inputText);
-      setIsEditing(false)
+      setIsEditing(false);
     }
+  };
+
+  const handleClearText = () => {
+    setShirtText("");
+    setInputText("");
+    setIsEditing(true);
   };
 
   return (
     <div className="mt-4">
       <h4>Added Text</h4>
       {!isEditing && (
-        <div>
+        <div style={{ marginTop: "5px" }}>
           <h3>{shirtText}</h3>
-          <button className={styles.btn} onClick={() => setIsEditing(true)}>
-            Edit Text
-          </button>
+          <div>
+            <button
+              style={{ margin: "5px 5px 0 0" }}
+              className={styles.btn}
+              onClick={() => setIsEditing(true)}
+            >
+              Edit Text
+            </button>
+            <button
+              style={{ marginTop: "5px" }}
+              className={styles.btn}
+              onClick={handleClearText}
+            >
+              Clear Text
+            </button>
+          </div>
         </div>
       )}
       {isEditing && (

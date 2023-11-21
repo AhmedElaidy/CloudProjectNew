@@ -33,9 +33,9 @@ const Product = (props) => {
     }));
   };
 
-  useEffect(()=>{
-console.log("prod is ", prod);
-  },[prod])
+  useEffect(() => {
+    console.log("prod is ", prod);
+  }, [prod]);
 
   return (
     <div className={classes.selection}>
@@ -43,7 +43,7 @@ console.log("prod is ", prod);
       <ProductSelectionColor color={prod.color} setColor={setColor} />
       <ProductSelectionText shirtText={prod.text} setShirtText={setText} />
       <div className="mt-4 ">
-        <div className={classes.buttonContainer}>
+        <div className={classes.addToCartButton}>
           <ButtonBlock
             onClick={addToCart}
             fontWeight="400"
@@ -68,5 +68,10 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     width: "300px",
     margin: "auto",
+  },
+  addToCartButton: {
+    width: "100%",
+    margin: "auto",
+    maxWidth: "300px",
   },
 }));
