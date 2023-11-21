@@ -12,9 +12,6 @@ import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 const CatalogList = (props) => {
   const { name } = useParams();
 
-  useEffect(() => {
-    console.log("name is ", name);
-  }, [name]);
   const { id } = props;
   const { subCategory, valueMax, valueMin, color, searchQuery } = UseStore();
 

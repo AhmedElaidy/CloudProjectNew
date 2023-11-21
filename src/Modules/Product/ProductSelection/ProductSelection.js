@@ -16,8 +16,6 @@ const Product = (props) => {
 
   const addToCart = () => {
     setCart([prod, ...cart]);
-    // localStorage.setItem('cart', cart)
-    // console.log(localStorage.getItem('cart'))
   };
 
   const setColor = (e) => {
@@ -35,16 +33,11 @@ const Product = (props) => {
   };
 
   const setGraphics = (graphic) => {
-    console.log("graphic is ", graphic);
     setProd((prevProd) => ({
       ...prevProd,
       graphics: {src: graphic.src, alt:graphic.alt, width:graphic.width,height:graphic.height},
     }));
   };
-
-  useEffect(() => {
-    console.log("prod is ", prod);
-  }, [prod]);
 
   return (
     <div className={classes.selection}>

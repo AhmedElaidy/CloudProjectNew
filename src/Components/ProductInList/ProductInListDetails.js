@@ -17,7 +17,7 @@ const ProductInListDetails = ({
       <div className="d-flex mt-2">
         <ProductInListInfo type="Color" chosen={color} />
         {text && <ProductInListInfo type="Text" chosen={text} />}
-        {graphics && <ProductInListInfo type="Graphics" chosen={graphics.alt} />}
+        {graphics?.alt && <ProductInListInfo type="Graphics" chosen={graphics.alt} />}
         {category && <ProductInListInfo type="Category" chosen={category} />}
       </div>
 

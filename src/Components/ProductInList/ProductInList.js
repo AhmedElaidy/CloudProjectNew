@@ -12,7 +12,7 @@ const ProductInList = (props) => {
   const classes = useStyles();
   const { category, color, graphics, id, img, name, price, subCategory, text } =
     props.product;
-  console.log("props are ", props);
+
   return (
     <div
       className={clsx(classes.product, {
@@ -24,9 +24,15 @@ const ProductInList = (props) => {
           <ProductInListProductImage img={img} />
         </Col>
         <Col className="d-flex flex-column" xs={9} sm={6} lg={7}>
-          <ProductInListDetails price={price} color={color} name={name} text={text} graphics={graphics} category={category}/>
-
-          <ProductInListDelete />
+          <ProductInListDetails
+            price={price}
+            color={color}
+            name={name}
+            text={text}
+            graphics={graphics}
+            category={category}
+          />
+          <ProductInListDelete index={props.index} handleRefresh={props.handleRefresh}/>
         </Col>
       </Row>
     </div>

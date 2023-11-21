@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/styles";
 
 const ProductInListProductImage = (props) => {
   const classes = useStyles();
-  console.log("props is ", props);
   return (
     <div className={classes.imgContainer}>
       <img

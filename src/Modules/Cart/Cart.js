@@ -1,27 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import ProductInList from "Components/ProductInList";
 import CartCheckout from "./CartCheckout";
 import UseStore from "Store/StoreContext";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Url from "Paths";
 
 const Cart = () => {
+  const history = useHistory();
+
   const { cart } = UseStore();
-  console.log("cart is ", cart);
-  let subTotal = 0;
 
-  useEffect(() => {
-    if (cart.length > 0) {
-      cart.map((product) => {
-        subTotal += Number(product.price);
-      });
-    }
-  }, [cart]);
-
-  useEffect(() => {
-    console.log("subTotal is ", subTotal);
-  }, [subTotal]);
+  
+  const handleRefresh = () => {
+    history.push(`${Url.HOME}/cart`);
+  };
 
   return (
     <Container fluid>
@@ -32,15 +27,19 @@ const Cart = () => {
       </Row>
       <Row className="mt-3 cart">
         <Col className="mb-3" xs={12} md={8}>
-          <ul class="list-group">
+          <ul className="list-group">
             {cart.length > 0 ? (
-              cart.map((product) => {
+              cart.map((product, index) => {
                 return (
                   <li
-                    class="list-group-item p-0 mb-3 border-0 "
+                    className="list-group-item p-0 mb-3 border-0 "
                     key={product.price * Math.random()}
                   >
-                    <ProductInList product={product} />
+                    <ProductInList
+                      product={product}
+                      index={index}
+                      handleRefresh={handleRefresh}
+                    />
                   </li>
                 );
               })
@@ -50,7 +49,7 @@ const Cart = () => {
           </ul>
         </Col>
         <Col className="mb-3" xs={12} md={4}>
-          <CartCheckout subTotal={subTotal} />
+          <CartCheckout cart={cart} />
         </Col>
       </Row>
     </Container>
