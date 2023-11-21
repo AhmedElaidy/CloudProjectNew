@@ -6,11 +6,12 @@ import UseStore from "Store/StoreContext";
 import { withRouter } from "react-router-dom";
 import ProductSelectionText from "./ProductSelectionText";
 import { useEffect } from "react";
+import ProductSelectionGraphics from "./ProductSelectionGraphics";
 
 const Product = (props) => {
   const classes = useStyles();
   const { current } = props;
-  const [prod, setProd] = useState({ ...current, text: "" });
+  const [prod, setProd] = useState({ ...current, text: "", graphics: {} });
   const { cart, setCart } = UseStore();
 
   const addToCart = () => {
@@ -33,6 +34,14 @@ const Product = (props) => {
     }));
   };
 
+  const setGraphics = (graphic) => {
+    console.log("graphic is ", graphic);
+    setProd((prevProd) => ({
+      ...prevProd,
+      graphics: {src: graphic.src, alt:graphic.alt, width:graphic.width,height:graphic.height},
+    }));
+  };
+
   useEffect(() => {
     console.log("prod is ", prod);
   }, [prod]);
@@ -42,6 +51,10 @@ const Product = (props) => {
       <h2 className={classes.title}>{current.name}</h2>
       <ProductSelectionColor color={prod.color} setColor={setColor} />
       <ProductSelectionText shirtText={prod.text} setShirtText={setText} />
+      <ProductSelectionGraphics
+        shirtGraphics={prod.graphics}
+        setShirtGraphics={setGraphics}
+      />
       <div className="mt-4 ">
         <div className={classes.addToCartButton}>
           <ButtonBlock
@@ -73,5 +86,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "auto",
     maxWidth: "300px",
+    height: '44px',
+    backgroundColor: 'rgb(85 30 30) !important',
+    color: 'rgb(255 255 255) !important',
+    borderRadius:"5px"
   },
 }));

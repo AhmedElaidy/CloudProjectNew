@@ -20,7 +20,7 @@ const ProductSelectionText = ({ shirtText, setShirtText }) => {
 
   return (
     <div className="mt-4">
-      <h4>Added Text</h4>
+      {shirtText && <h4>Added Text</h4>}
       {!isEditing && (
         <div style={{ marginTop: "5px" }}>
           <h3>{shirtText}</h3>

@@ -21,3 +21,24 @@
                     color: rgb(247, 243, 245) !important;
                     padding: 10px;
 }
+.imgs_div{
+        margin: 20px 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+}
+.img_div {
+    transition: .3s;
+    cursor: pointer;
+}
+.btns_div button{
+    transition: .3s;
+    cursor: pointer;
+}
+.img_div:hover {
+    scale: 110%;
+}
+.btns_div button:hover{
+    scale: 110%;
+
+}
