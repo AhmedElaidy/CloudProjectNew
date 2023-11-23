@@ -4,20 +4,11 @@ import clsx from "clsx";
 import ButtonBlock from "Components/Buttons/ButtonBlock";
 import { Link } from "react-router-dom";
 import Url from "Paths";
+import useStore from "Store/StoreContext";
 
-const CartCheckout = ({ cart }) => {
-  const [subTotal, setSubTotal] = useState(0);
-
-  useEffect(()=>{
-    if (cart.length > 0) {
-      cart.map((product) => {
-        setSubTotal((prevSubTotal) => (prevSubTotal += Number(product.price)));
-      });
-    }
-  },[cart])
-
+const CartCheckout = () => {
+  const { subTotal } = useStore();
   const classes = useStyles();
-
   return (
     <div
       className={clsx(classes.checkout, {

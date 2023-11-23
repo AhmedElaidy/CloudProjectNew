@@ -17,8 +17,6 @@ const CatalogFilter = () => {
       <Divider />
       <CatalogFilterPrice />
       <Divider />
-      <CatalogFilterSizes sizes={sizes} />
-      <Divider />
       <SearchField />
     </div>
   );

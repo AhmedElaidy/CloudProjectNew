@@ -7,7 +7,6 @@ const HomePageNewRelease = () => {
   return (
     <Container className='mt-5' >
       <ProductCarousel heading='New Arrivals' products={productArray} />
-
     </Container>
   )
 }

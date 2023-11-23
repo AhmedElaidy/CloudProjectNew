@@ -5,7 +5,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import { makeStyles, useTheme } from "@material-ui/styles";
-import SearchField from "Components/SearchField/SearchField";
 import IconText from "Components/IconText";
 import NavLink from "../Components/NavLink";
 import clsx from "clsx";
@@ -15,7 +14,22 @@ import { withRouter } from "react-router-dom";
 const Header = () => {
   const classes = useStyles();
 
-  const { cart } = UseStore();
+  const { cart, user } = UseStore();
+  const { userRole } = user;
+
+  const renderAdminLinks = () => {
+    if (userRole.toLowerCase() === "admin") {
+      return <NavLink linkAdress="/pending-designs">Pending Designs</NavLink>;
+    }
+    return null;
+  };
+
+  const renderDesignerLinks = () => {
+    if (userRole.toLowerCase() === "designer") {
+      return <NavLink linkAdress="/my-designs">My Designs</NavLink>;
+    }
+    return null;
+  };
   return (
     <Navbar className={classes.root} bg="light" expand="lg">
       <Container className="p-0" fluid="fluid">
@@ -48,6 +62,9 @@ const Header = () => {
                 <NavLink linkAdress="/Women">Women</NavLink>
                 <NavLink linkAdress="/Kids">Kids</NavLink>
                 <NavLink linkAdress="/Sale">Sale</NavLink>
+                {renderAdminLinks()}
+                {renderDesignerLinks()}
+
                 <Navbar.Toggle
                   className={clsx(classes.toggleButton, {
                     "position-absolute ": true,

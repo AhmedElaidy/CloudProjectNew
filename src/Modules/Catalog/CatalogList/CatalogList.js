@@ -10,8 +10,6 @@ import { filterCategory, filterPrice, filterColor, filterName } from "./CatalogL
 import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 
 const CatalogList = (props) => {
-  const { name } = useParams();
-
   const { id } = props;
   const { subCategory, valueMax, valueMin, color, searchQuery } = UseStore();
 

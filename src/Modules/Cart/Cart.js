@@ -10,13 +10,19 @@ import Url from "Paths";
 
 const Cart = () => {
   const history = useHistory();
+  const { cart, setSubTotal } = UseStore();
 
-  const { cart } = UseStore();
-
-  
   const handleRefresh = () => {
     history.push(`${Url.HOME}/cart`);
   };
+
+  useEffect(() => {
+    let localSubTotal = 0;
+    cart.map((product) => {
+      localSubTotal += Number(product.price);
+    });
+    setSubTotal(localSubTotal);
+  });
 
   return (
     <Container fluid>
@@ -49,7 +55,7 @@ const Cart = () => {
           </ul>
         </Col>
         <Col className="mb-3" xs={12} md={4}>
-          <CartCheckout cart={cart} />
+          <CartCheckout />
         </Col>
       </Row>
     </Container>

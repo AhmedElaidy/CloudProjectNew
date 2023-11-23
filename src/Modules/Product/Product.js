@@ -24,11 +24,7 @@ const Product = () => {
         <Col xs={12} lg={6}>
           <ProductSelection current={current} title={current.name} id={id} />
         </Col>
-        <Col xs={12}>
-          <ProductComments />
-        </Col>
       </Row>
-
     </Container>
 
   )
