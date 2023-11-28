@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext } from "react";
+import axios from "axios";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 export const StoreContext = createContext({});
 
@@ -15,6 +16,7 @@ export const StoreContextProvider = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [subTotal, setSubTotal] = useState(0);
   const [user, setUser] = useState({ userRole: "designer" });
+  const [products, setProducts] = useState([]);
   const [MyDesigns, setMyDesigns] = useState([
     {
       id: 1,
@@ -53,6 +55,21 @@ export const StoreContextProvider = ({ children }) => {
       img: ["https://i.ibb.co/VgCvZ4R/pngimg-com-apple-logo-PNG19688.png"],
     },
   ]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      await axios
+        .get(`http://192.168.1.76:5000/products`)
+        .then((response) => {
+          setProducts(response.data.products);
+        })
+        .catch((err) => {
+          console.log("err is ", err);
+        });
+    };
+    getProducts();
+  }, []);
+
   return (
     <StoreContext.Provider
       value={{
@@ -74,6 +91,8 @@ export const StoreContextProvider = ({ children }) => {
         setUser,
         MyDesigns,
         setMyDesigns,
+        products,
+        setProducts
       }}
     >
       {children}

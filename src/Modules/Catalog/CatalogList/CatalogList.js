@@ -2,16 +2,27 @@ import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Product from "Components/Product";
-import { products } from "Api/ClothingDatabase";
 import CatalogListSortBy from "./CatalogListSortBy";
 import CatalogListPagination from "./CatalogListPagination";
 import UseStore from "Store/StoreContext";
-import { filterCategory, filterPrice, filterColor, filterName } from "./CatalogListUtils";
-import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
+import {
+  filterCategory,
+  filterPrice,
+  filterColor,
+  filterName,
+} from "./CatalogListUtils";
+import axios from "axios";
 
 const CatalogList = (props) => {
   const { id } = props;
-  const { subCategory, valueMax, valueMin, color, searchQuery } = UseStore();
+  const {
+    subCategory,
+    valueMax,
+    valueMin,
+    color,
+    searchQuery,
+    products,
+  } = UseStore();
 
   const [sort, setSort] = useState("newest");
 
@@ -20,6 +31,7 @@ const CatalogList = (props) => {
   };
 
   function filtery(product) {
+    console.log("product is ", product);
     let category = filterCategory(product, subCategory);
     let price = filterPrice(product, valueMin, valueMax);
     let colors = filterColor(product, color);
@@ -42,6 +54,7 @@ const CatalogList = (props) => {
   function capitalize(product) {
     return product.category.charAt(0).toUpperCase() + product.category.slice(1);
   }
+
   return (
     <div>
       <Row>
@@ -63,8 +76,8 @@ const CatalogList = (props) => {
                   xl={3}
                 >
                   <Product
-                    link={product.id}
-                    img={product.img[0]}
+                    link={product._id}
+                    img={product.img}
                     name={product.name}
                     price={product.price}
                   />

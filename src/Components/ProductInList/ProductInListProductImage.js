@@ -7,7 +7,7 @@ const ProductInListProductImage = (props) => {
     <div className={classes.imgContainer}>
       <img
         className="w-100 h-100 border-rounded"
-        src={`${process.env.PUBLIC_URL}/images/product/${props.img[0]}`}
+        src={`${process.env.PUBLIC_URL}/images/product/${props.img}`}
         alt="product img"
       />
     </div>

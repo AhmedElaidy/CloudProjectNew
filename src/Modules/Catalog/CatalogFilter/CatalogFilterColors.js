@@ -30,7 +30,7 @@ const CatalogFilterColors = (props) => {
       <h3 className={classes.title}>Choose Color</h3>
       <div className='d-flex mt-2 flex-wrap'>
         {colors.map((color, index) => (
-          <div>
+          <div key={index}>
             <ButtonColor
               active={active(color)}
               onClick={() => handleClick(color)}

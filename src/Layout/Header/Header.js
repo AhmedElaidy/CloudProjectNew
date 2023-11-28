@@ -61,7 +61,6 @@ const Header = () => {
                 <NavLink linkAdress="/Men">Men</NavLink>
                 <NavLink linkAdress="/Women">Women</NavLink>
                 <NavLink linkAdress="/Kids">Kids</NavLink>
-                <NavLink linkAdress="/Sale">Sale</NavLink>
                 {renderAdminLinks()}
                 {renderDesignerLinks()}
 

@@ -9,7 +9,7 @@ const Product = (props) => {
   const { img, price, name, link } = props;
   return (
     <Link
-      to={`${Url.HOME}/product${link}`}
+      to={`${Url.HOME}/product/${link}`}
       className={clsx(classes.product, {
         'w-100 h-100 ': true
       })}>

@@ -1,5 +1,10 @@
 const Search = (array, value) => {
-  return array.find(({ id }) => id === value)
-}
+  console.log("array is ", array);
+  return array.find(({ _id }) => {
+    console.log("_id is ", _id);
+    console.log("value is ", value);
+    return _id === value;
+  });
+};
 
-export default Search
+export default Search;

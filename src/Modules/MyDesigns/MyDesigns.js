@@ -27,7 +27,7 @@ const MyDesigns = () => {
             >
               <DesignProduct
                 link={design.id}
-                img={design.img[0]}
+                img={design.img}
                 name={design.name}
                 price={design.price}
               />

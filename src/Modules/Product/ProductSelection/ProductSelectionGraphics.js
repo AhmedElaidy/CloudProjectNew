@@ -45,9 +45,8 @@ const ProductSelectionGraphics = ({ shirtGraphics, setShirtGraphics }) => {
         <div className={styles.imgs_div}>
           {imgs.map((img) => {
             return (
-              <div className={styles.img_div}>
+              <div key={img.src} className={styles.img_div}>
                 <img
-                  key={img.src}
                   src={img.src}
                   alt={img.alt}
                   width={img.width}
