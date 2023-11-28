@@ -36,9 +36,7 @@ const MyDesigns = () => {
         })}
       </Row>
       <Row className="d-flex justify-content-center mt-2 mb-2 w-25">
-        <Link to={`${Url.HOME}/my-designs/create`}>
-          <ButtonBlock fontWeight="400" text="Create Design" />
-        </Link>
+          <ButtonBlock as={Link} to={Url.CreateProduct} fontWeight="400" text="Create Design" />
       </Row>
     </div>
   );

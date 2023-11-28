@@ -64,19 +64,13 @@ const Header = () => {
                 {renderAdminLinks()}
                 {renderDesignerLinks()}
 
-                <Navbar.Toggle
-                  className={clsx(classes.toggleButton, {
-                    "position-absolute ": true,
-                  })}
-                  aria-controls="basic-navbar-nav"
-                />
-              </Row>
-            </Col>
-            <Col
+                </Row>
+                </Col>
+                <Col
               className="align-items-center 
-            justify-content-center 
-            justify-content-lg-end 
-            justify-content-xl-end 
+              justify-content-center 
+              justify-content-lg-end 
+              justify-content-xl-end 
             flex-column
             flex-xl-row
             flex-lg-row
@@ -84,10 +78,10 @@ const Header = () => {
               xs={12}
               lg={3}
             >
-              <Nav.Link href="/clothingstoretemplate/auth"></Nav.Link>
+            <Nav.Link href="/clothingstoretemplate/auth"></Nav.Link>
               <NavLink linkAdress="/auth">
                 <IconText
-                  icon="/icons/user/userGrey.svg"
+                icon="/icons/user/userGrey.svg"
                   text="Login / Register"
                 />
               </NavLink>
@@ -102,6 +96,14 @@ const Header = () => {
           </Row>
         </Navbar.Collapse>
       </Container>
+      <div className="d-flex justify-content-center w-100">
+      <Navbar.Toggle
+      className={clsx(classes.toggleButton, {
+        "position-absolute ": true,
+      })}
+      aria-controls="basic-navbar-nav"
+      />
+      </div>
     </Navbar>
   );
 };
