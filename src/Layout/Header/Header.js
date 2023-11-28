@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Col from "react-bootstrap/Col";
@@ -17,16 +17,42 @@ const Header = () => {
   const { cart, user } = UseStore();
   const { userRole } = user;
 
-  const renderAdminLinks = () => {
-    if (userRole.toLowerCase() === "admin") {
-      return <NavLink linkAdress="/pending-designs">Pending Designs</NavLink>;
+  const RegularUserLinks = () => {
+    return (
+      <Fragment>
+        <NavLink linkAdress="/Men">Men</NavLink>
+        <NavLink linkAdress="/Women">Women</NavLink>
+        <NavLink linkAdress="/Kids">Kids</NavLink>
+      </Fragment>
+    );
+  };
+
+  const renderRegularUserLinks = () => {
+    if (userRole.toLowerCase() === "regular") {
+      return <RegularUserLinks />;
     }
     return null;
   };
 
   const renderDesignerLinks = () => {
     if (userRole.toLowerCase() === "designer") {
-      return <NavLink linkAdress="/my-designs">My Designs</NavLink>;
+      return (
+        <Fragment>
+          <RegularUserLinks />
+          <NavLink linkAdress="/my-designs">My Designs</NavLink>
+        </Fragment>
+      );
+    }
+    return null;
+  };
+  const renderAdminLinks = () => {
+    if (userRole.toLowerCase() === "admin") {
+      return (
+        <Fragment>
+          <NavLink linkAdress="/add-product">Add Product</NavLink>
+          <NavLink linkAdress="/pending-designs">Pending Designs</NavLink>
+        </Fragment>
+      );
     }
     return null;
   };
@@ -37,36 +63,39 @@ const Header = () => {
           <Row className="w-100 m-0" xs={12}>
             <Col
               className="align-items-center 
-            justify-content-lg-start 
+    justify-content-lg-start 
             justify-content-xl-start 
             justify-content-center 
             d-flex"
               xs={12}
               lg={3}
             >
-              <Navbar.Brand href="/clothingstoretemplate/">
-                <img src={`${process.env.PUBLIC_URL}/icons/logo/logo.svg`} />
-              </Navbar.Brand>
+              {userRole.toLowerCase() === "admin" ? (
+                <Navbar.Brand href="/clothingstore/pending-designs">
+                  <img src={`${process.env.PUBLIC_URL}/icons/logo/logo.svg`} />
+                </Navbar.Brand>
+              ) : (
+                <Navbar.Brand href="/clothingstore/">
+                  <img src={`${process.env.PUBLIC_URL}/icons/logo/logo.svg`} />
+                </Navbar.Brand>
+              )}
             </Col>
             <Col className="align-items-center d-flex" xs={12} lg={6}>
               <Row
                 className="d-flex m-0 
-        position-relative
-        justify-content-xl-center 
+            position-relative
+            justify-content-xl-center 
         justify-content-lg-center 
         justify-content-md-center 
         justify-content-sm-center 
         justify-content-start w-100"
               >
-                <NavLink linkAdress="/Men">Men</NavLink>
-                <NavLink linkAdress="/Women">Women</NavLink>
-                <NavLink linkAdress="/Kids">Kids</NavLink>
+                {renderRegularUserLinks()}
                 {renderAdminLinks()}
                 {renderDesignerLinks()}
-
-                </Row>
-                </Col>
-                <Col
+              </Row>
+            </Col>
+            <Col
               className="align-items-center 
               justify-content-center 
               justify-content-lg-end 
@@ -78,10 +107,10 @@ const Header = () => {
               xs={12}
               lg={3}
             >
-            <Nav.Link href="/clothingstoretemplate/auth"></Nav.Link>
+              <Nav.Link href="/clothingstore/auth"></Nav.Link>
               <NavLink linkAdress="/auth">
                 <IconText
-                icon="/icons/user/userGrey.svg"
+                  icon="/icons/user/userGrey.svg"
                   text="Login / Register"
                 />
               </NavLink>
@@ -97,12 +126,12 @@ const Header = () => {
         </Navbar.Collapse>
       </Container>
       <div className="d-flex justify-content-center w-100">
-      <Navbar.Toggle
-      className={clsx(classes.toggleButton, {
-        "position-absolute ": true,
-      })}
-      aria-controls="basic-navbar-nav"
-      />
+        <Navbar.Toggle
+          className={clsx(classes.toggleButton, {
+            "position-absolute ": true,
+          })}
+          aria-controls="basic-navbar-nav"
+        />
       </div>
     </Navbar>
   );

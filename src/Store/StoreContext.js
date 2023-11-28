@@ -15,7 +15,7 @@ export const StoreContextProvider = ({ children }) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [subTotal, setSubTotal] = useState(0);
-  const [user, setUser] = useState({ userRole: "designer" });
+  const [user, setUser] = useState({ userRole: "admin" });
   const [products, setProducts] = useState([]);
   const [MyDesigns, setMyDesigns] = useState([
     {
@@ -59,7 +59,7 @@ export const StoreContextProvider = ({ children }) => {
   useEffect(() => {
     const getProducts = async () => {
       await axios
-        .get(`http://192.168.1.76:5000/products`)
+        .get(`http://192.168.1.6:5000/products`)
         .then((response) => {
           setProducts(response.data.products);
         })
@@ -92,7 +92,7 @@ export const StoreContextProvider = ({ children }) => {
         MyDesigns,
         setMyDesigns,
         products,
-        setProducts
+        setProducts,
       }}
     >
       {children}

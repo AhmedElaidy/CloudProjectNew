@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import DesignProduct from "./DesignProduct";
 import useStore from "Store/StoreContext";
 import ButtonBlock from "Components/Buttons/ButtonBlock";
 import { Link } from "react-router-dom";
 import Url from "Paths";
+import DesignedProduct from "./DesignedProduct";
 
 const MyDesigns = () => {
   const { MyDesigns } = useStore();
@@ -25,7 +25,7 @@ const MyDesigns = () => {
               xl={3}
               style={{ borderRadius: "5px" }}
             >
-              <DesignProduct
+              <DesignedProduct
                 link={design.id}
                 img={design.img}
                 name={design.name}
@@ -36,7 +36,7 @@ const MyDesigns = () => {
         })}
       </Row>
       <Row className="d-flex justify-content-center mt-2 mb-2 w-25">
-          <ButtonBlock as={Link} to={Url.CreateProduct} fontWeight="400" text="Create Design" />
+          <ButtonBlock as={Link} to={Url.CreateDesign} fontWeight="400" text="Create Design" />
       </Row>
     </div>
   );

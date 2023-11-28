@@ -7,9 +7,10 @@ import Catalog from "Modules/Catalog";
 import Cart from "Modules/Cart";
 import Checkout from "Modules/Checkout";
 import Product from "Modules/Product";
-import PendingDesigns from "Modules/PendingDesigns";
+import PendingDesigns from "Modules/Admin/PendingDesigns";
 import MyDesigns from "Modules/MyDesigns";
-import CreateProduct from "Modules/MyDesigns/CreateProduct";
+import AddProduct from "Modules/Admin/AddProduct/PendingDesigns/AddProduct";
+import CreateDesign from "Modules/MyDesigns/CreateDesign";
 
 const Redirection = () => {
   return <Redirect to={Url.HOME} />;
@@ -47,24 +48,29 @@ const routes = [
     component: Checkout,
   },
   {
-    path: Url.PendingDesigns,
-    exact: true,
-    component: PendingDesigns,
-  },
-  {
     path: Url.MyDesigns,
     exact: true,
     component: MyDesigns,
   },
   {
-    path: Url.CreateProduct,
+    path: Url.CreateDesign,
     exact: true,
-    component: CreateProduct,
+    component: CreateDesign,
+  },
+  {
+    path: Url.PendingDesigns,
+    exact: true,
+    component: PendingDesigns,
   },
   {
     path: Url.UpdateProduct,
     exact: true,
-    component: CreateProduct,
+    component: CreateDesign,
+  },
+  {
+    path: Url.AddProduct,
+    exact: true,
+    component: AddProduct,
   },
   {
     path: Url.Catalog,

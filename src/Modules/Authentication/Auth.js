@@ -9,7 +9,6 @@ const Auth = () => {
   return (
     <div className={classes.auth}>
       <Tabs tabs={TabPanels} />
-
     </div>
   )
 }

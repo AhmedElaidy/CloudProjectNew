@@ -8,11 +8,11 @@ import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 
-const CreateProduct = () => {
+const CreateDesign = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const handleCreateProduct = (e) => {
+  const handleCreateDesign = (e) => {
     e.preventDefault();
   };
 
@@ -142,7 +142,7 @@ const CreateProduct = () => {
   return (
     <div className="d-flex justify-content-center">
       <form
-        onSubmit={handleCreateProduct}
+        onSubmit={handleCreateDesign}
         className="w-50"
         style={{ minWidth: "250px" }}
       >
@@ -164,4 +164,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default CreateDesign;

@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Link } from "react-router-dom";
 import Url from "Paths";
 
-const DesignProduct = (props) => {
+const DesignedProduct = (props) => {
   const classes = useStyles();
   const { img, price, name, link } = props;
   return (
@@ -55,4 +55,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default DesignProduct;
+export default DesignedProduct;
