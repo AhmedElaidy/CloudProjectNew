@@ -23,7 +23,6 @@ const TabPanel = (props) => {
 
 const useStyles = makeStyles((theme) => ({
   TabsPanel: {
-    border: '1px solid',
     borderColor: theme.colors.grey,
     height: 114,
     '& a': {

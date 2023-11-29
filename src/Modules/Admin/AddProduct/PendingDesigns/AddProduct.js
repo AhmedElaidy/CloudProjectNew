@@ -1,21 +1,15 @@
 import ButtonBlock from "Components/Buttons/ButtonBlock";
 import InputField from "Components/InputField";
 import Checkbox from "Components/Switches/Checkbox";
+import axios from "axios";
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Container, Dropdown } from "react-bootstrap";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 
 const AddProduct = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
-
-  const handleAddDesign = (e) => {
-    e.preventDefault();
-  };
-
   const [product, setProduct] = useState({
     name: "",
     color: "",
@@ -23,7 +17,63 @@ const AddProduct = () => {
     subCategory: "",
     price: 0,
     imgLink: "",
+    desc: "",
   });
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+  const [isDataNotCompleted, setIsDataNotCompleted] = useState(false);
+
+  const isValid = (word) => {
+    if (word.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const onInputChange = (e) => {
+    setProduct((oldProduct) => {
+      return { ...oldProduct, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleAddDesign = (e) => {
+    e.preventDefault();
+    if (
+      isValid(product.color) &&
+      isValid(product.category) &&
+      isValid(product.imgLink) &&
+      isValid(product.name) &&
+      isValid(product.price) &&
+      isValid(product.desc) &&
+      isValid(product.subCategory)
+    ) {
+      axios
+        .post(
+          `http://192.168.1.6:5000/products`,
+          {
+            color: product.color,
+            category: product.category,
+            imgLink: product.imgLink,
+            name: product.name,
+            price: product.price,
+            desc: product.desc,
+            subCategory: product.subCategory,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              // Add other headers if needed
+            },
+          }
+        )
+        .then((response) => {
+          console.log("response is ", response);
+        });
+    } else {
+      setIsDataNotCompleted(true);
+    }
+  };
 
   const CategoryChoice = () => {
     const categoryOptions = [
@@ -138,29 +188,66 @@ const AddProduct = () => {
       </Dropdown>
     );
   };
-
+  useEffect(() => {
+    if (isDataNotCompleted) {
+      setTimeout(() => {
+        setIsDataNotCompleted(false);
+      }, 3000);
+    }
+  }, [isDataNotCompleted]);
   return (
-    <div className="d-flex justify-content-center">
-      <form
-        onSubmit={handleAddDesign}
-        className="w-50"
-        style={{ minWidth: "250px" }}
-      >
-        <InputField placeholder="Name" value="name" />
-        <div className="d-flex justify-content-around">
-          <ColorChoice />
-          <CategoryChoice />
-          <SubCategoryChoice />
-        </div>
-        <InputField placeholder="Price" />
-        <InputField placeholder="Img Link" />
-        <ButtonBlock
-          type="submit"
-          text="Add Product"
-          style={{ margin: "15px 0" }}
-        />
-      </form>
-    </div>
+    <Fragment>
+      {isDataNotCompleted && (
+        <h5 style={{ color: "red", textAlign: "center" }}>
+          !Please Be Sure To Fill All The Fields
+        </h5>
+      )}
+      <div className="d-flex justify-content-center">
+        <form
+          onSubmit={handleAddDesign}
+          className="w-50"
+          style={{ minWidth: "250px" }}
+        >
+          <InputField
+            placeholder="Name"
+            value={product.name}
+            name="name"
+            onChange={onInputChange}
+          />
+          <div className="d-flex justify-content-around">
+            <ColorChoice />
+            <CategoryChoice />
+            <SubCategoryChoice />
+          </div>
+          <InputField
+            placeholder="Price"
+            value={product.price}
+            name="price"
+            type="number"
+            onChange={onInputChange}
+          />
+          <InputField
+            placeholder="Img Link"
+            value={product.imgLink}
+            name="imgLink"
+            type="text"
+            onChange={onInputChange}
+          />
+          <InputField
+            placeholder="Description"
+            value={product.desc}
+            name="desc"
+            type="text"
+            onChange={onInputChange}
+          />
+          <ButtonBlock
+            type="submit"
+            text="Add Product"
+            style={{ margin: "15px 0" }}
+          />
+        </form>
+      </div>
+    </Fragment>
   );
 };
 

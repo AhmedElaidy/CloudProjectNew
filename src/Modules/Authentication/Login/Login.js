@@ -1,32 +1,96 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
 import { makeStyles } from "@material-ui/styles";
 import ButtonBlock from "Components/Buttons/ButtonBlock";
-import Checkbox from "Components/Switches/Checkbox";
+import InputField from "Components/InputField";
+import axios from "axios";
 import clsx from "clsx";
+import React, { useEffect, useState } from "react";
+import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
-import LoginField from "./form/LoginField";
-import PasswordField from "./form/PasswordField";
-import FacebookField from "./form/FacebookField";
-import GoogleField from "./form/GoogleField";
 
 const Login = () => {
   const classes = useStyles();
+  const [isSomethingWrong, setIsSomethingWrong] = useState(false);
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onInputChange = (e) => {
+    setUser((oldData) => {
+      return { ...oldData, [e.target.name]: e.target.value };
+    });
+  };
+
+  const isValid = (word) => {
+    if (word.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (isValid(user.email) && isValid(user.password)) {
+      axios
+        .post(
+          "http://192.168.1.6:5000/auth/login",
+          {
+            email: user.email,
+            password: user.password,
+          },
+        )
+        .then((res) => {
+          setUser({
+            email: "",
+            password: "",
+          });
+          console.log("res is ", res);
+          history.push("/");
+        });
+    } else {
+      setIsSomethingWrong(true);
+    }
+  };
+
+  useEffect(() => {
+    if (isSomethingWrong) {
+      setTimeout(() => {
+        setIsSomethingWrong(false);
+      }, 3000);
+    }
+  }, [isSomethingWrong]);
   return (
     <Container
       className={clsx(classes.login, {
         "mt-4": true,
       })}
     >
-      <form>
-        <LoginField />
-        <PasswordField />
+      {isSomethingWrong && (
+        <h5 style={{ color: "red" }}>Email Or Password Is Wrong!</h5>
+      )}
+      <form onSubmit={handleLogin}>
+        <InputField
+          icon="/icons/user/userBlack.svg"
+          placeholder="Email"
+          type="email"
+          name="email"
+          value={user.email}
+          onChange={onInputChange}
+        />
+        <InputField
+          icon="/icons/password/passwordBlack.svg"
+          placeholder="Password"
+          type="password"
+          name="password"
+          value={user.password}
+          onChange={onInputChange}
+        />
         <div
           className={clsx(classes.check, {
-            "mt-4 p-2 mb-2 d-flex": true,
+            "mt-4 p-2 mb-2 ": true,
           })}
         >
-          <Checkbox label="Remember Me!" />
           <Link className={classes.forgotPassword}>Forgot your password?</Link>
         </div>
         <ButtonBlock text="Login" type="submit" />
