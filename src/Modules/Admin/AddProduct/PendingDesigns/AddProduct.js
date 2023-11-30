@@ -1,22 +1,25 @@
 import ButtonBlock from "Components/Buttons/ButtonBlock";
 import InputField from "Components/InputField";
 import Checkbox from "Components/Switches/Checkbox";
+import AuthContext from "Store/AuthContext";
 import axios from "axios";
 import clsx from "clsx";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Container, Dropdown } from "react-bootstrap";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 
 const AddProduct = () => {
+  const userContext = useContext(AuthContext);
+  const { id, userRole } = userContext.user;
   const [product, setProduct] = useState({
     name: "",
     color: "",
     category: "",
     subCategory: "",
     price: 0,
-    imgLink: "",
+    img: "",
     desc: "",
   });
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +45,7 @@ const AddProduct = () => {
     if (
       isValid(product.color) &&
       isValid(product.category) &&
-      isValid(product.imgLink) &&
+      isValid(product.img) &&
       isValid(product.name) &&
       isValid(product.price) &&
       isValid(product.desc) &&
@@ -50,25 +53,30 @@ const AddProduct = () => {
     ) {
       axios
         .post(
-          `http://192.168.1.6:5000/products`,
+          `http://192.168.1.76:5000/products`,
           {
+            id,
             color: product.color,
             category: product.category,
-            imgLink: product.imgLink,
+            img: product.img,
             name: product.name,
             price: product.price,
             desc: product.desc,
             subCategory: product.subCategory,
+            userRole,
           },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              // Add other headers if needed
-            },
-          }
+          { "Content-Type": "application/json" }
         )
-        .then((response) => {
-          console.log("response is ", response);
+        .then(() => {
+          setProduct({
+            name: "",
+            color: "",
+            category: "",
+            subCategory: "",
+            price: 0,
+            img: "",
+            desc: "",
+          });
         });
     } else {
       setIsDataNotCompleted(true);
@@ -228,8 +236,8 @@ const AddProduct = () => {
           />
           <InputField
             placeholder="Img Link"
-            value={product.imgLink}
-            name="imgLink"
+            value={product.img}
+            name="img"
             type="text"
             onChange={onInputChange}
           />

@@ -7,16 +7,19 @@ import { ThemeProvider } from "@material-ui/styles";
 import Layout from "Layout";
 import { RenderRoutes } from "Routes";
 import { StoreContextProvider } from "Store/StoreContext";
+import AuthProvider from "Store/AuthProvider";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <StoreContextProvider>
-        <Router>
-          <Layout>
-            <RenderRoutes />
-          </Layout>
-        </Router>
+        <AuthProvider>
+          <Router>
+            <Layout>
+              <RenderRoutes />
+            </Layout>
+          </Router>
+        </AuthProvider>
       </StoreContextProvider>
     </ThemeProvider>
   );

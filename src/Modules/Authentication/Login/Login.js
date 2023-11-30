@@ -1,14 +1,18 @@
 import { makeStyles } from "@material-ui/styles";
 import ButtonBlock from "Components/Buttons/ButtonBlock";
 import InputField from "Components/InputField";
+import AuthContext from "Store/AuthContext";
 import axios from "axios";
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Login = () => {
   const classes = useStyles();
+  const history = useHistory();
+  const authContext = useContext(AuthContext);
   const [isSomethingWrong, setIsSomethingWrong] = useState(false);
   const [user, setUser] = useState({
     email: "",
@@ -31,21 +35,32 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    console.log("authContext is ", authContext);
     if (isValid(user.email) && isValid(user.password)) {
       axios
-        .post(
-          "http://192.168.1.6:5000/auth/login",
-          {
-            email: user.email,
-            password: user.password,
-          },
-        )
+        .post("http://192.168.1.76:5000/auth/login", {
+          email: user.email,
+          password: user.password,
+        })
         .then((res) => {
           setUser({
             email: "",
             password: "",
           });
-          console.log("res is ", res);
+          console.log(res.data);
+          const userRole = res.data.admin
+            ? "admin"
+            : res.data.designer
+            ? "designer"
+            : "regular";
+
+            console.log("userRole is ", userRole);
+          authContext.login(
+            res.data.id ? res.data.id : "",
+            res.data.email,
+            res.data.jwt,
+            userRole
+          );
           history.push("/");
         });
     } else {

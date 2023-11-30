@@ -1,14 +1,14 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import HomePageBanner from "./HomePageBanner";
 import HomePageSection from "./HomePageSection";
 import HomePageNewRelease from "./HomePageNewRelease";
 import useStore from "Store/StoreContext";
+import AuthContext from "Store/AuthContext";
 
 const HomePage = () => {
-  const { user } = useStore();
-  const { userRole } = user;
+  const { userRole } = useContext(AuthContext);
 
-  if (userRole.toLowerCase() === "admin") {
+  if (userRole?.toLowerCase() === "admin") {
     return (
       <h3 className="text-center"> You Are Not Authorized To See This Page</h3>
     );

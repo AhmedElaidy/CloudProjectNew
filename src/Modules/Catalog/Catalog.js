@@ -8,8 +8,6 @@ import { useParams } from "react-router-dom";
 const Catalog = () => {
   const { id } = useParams();
 
-  
-
   return (
     <Row className='m-0'>
       <Col className='mb-3' xs={12} lg={3}>
