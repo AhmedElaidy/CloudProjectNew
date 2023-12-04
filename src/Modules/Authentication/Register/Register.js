@@ -53,7 +53,7 @@ const Register = () => {
     ) {
       axios
         .post(
-          "http://192.168.1.6:5000/auth/signup",
+          "http://192.168.1.76:5000/auth/signup",
           {
             fullName: user.fullName,
             email: user.email,

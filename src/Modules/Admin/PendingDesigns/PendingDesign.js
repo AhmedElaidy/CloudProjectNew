@@ -4,15 +4,17 @@ import clsx from "clsx";
 import { Link } from "react-router-dom";
 import Url from "Paths";
 import styles from "./pendingDesign.module.css";
+import axios from "axios";
 
 const PendingDesign = (props) => {
   const classes = useStyles();
-  const { img, price, name, link } = props;
+  const { id, img, price, name, link } = props;
   const approveDesign = () => {
     console.log("approve");
   };
   const declineDesign = () => {
-    console.log("decline");
+    axios.delete(`http://192.168.1.76:5000/products/${id}`);
+    props.generatePendingProducts();
   };
   return (
     <div

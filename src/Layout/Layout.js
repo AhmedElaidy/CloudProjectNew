@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const Layout = ({ children }) => {
   const history = useHistory();
   const { token } = useContext(AuthContext);
-  if (!token) {
+  if (token) {
     history.push("/clothingstore/auth");
   }
 

@@ -6,18 +6,34 @@ import CatalogFilterColors from "./CatalogFilterColors";
 import CatalogFilterPrice from "./CatalogFilterPrice";
 import CatalogFilterSizes from "./CatalogFilterSizes";
 import SearchField from "Components/SearchField";
+import ButtonBlock from "Components/Buttons/ButtonBlock";
 
-const CatalogFilter = () => {
+const CatalogFilter = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.filterContainer}>
-      <CatalogFilterDepartment clothingTypes={clothingTypes} />
+      <CatalogFilterDepartment
+        clothingTypes={clothingTypes}
+        subCategory={props.subCategory}
+        setSubCategory={props.setSubCategory}
+        typeFilter={props.typeFilter}
+      />
       <Divider />
-      <CatalogFilterColors />
+      <CatalogFilterColors color={props.color} setColor={props.setColor} />
       <Divider />
-      <CatalogFilterPrice />
+      <CatalogFilterPrice
+        valueMin={props.valueMin}
+        valueMax={props.valueMax}
+        setValueMin={props.setValueMin}
+        setValueMax={props.setValueMax}
+      />
       <Divider />
-      <SearchField />
+      <SearchField
+        searchQuery={props.searchQuery}
+        setSearchQuery={props.setSearchQuery}
+      />
+      <Divider />
+      <ButtonBlock text="Submit Filters" onClick={props.submitFilter} />
     </div>
   );
 };

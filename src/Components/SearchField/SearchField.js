@@ -6,7 +6,7 @@ import ButtonRound from "Components/Buttons/ButtonRound";
 import { useHistory } from "react-router-dom";
 import useStore from "Store/StoreContext";
 
-const SearchField = () => {
+const SearchField = (props) => {
   const [searchInput, setSearchInput] = useState();
   const { searchQuery, setSearchQuery } = useStore();
 

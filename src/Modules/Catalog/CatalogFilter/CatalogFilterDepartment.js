@@ -7,7 +7,7 @@ import UseStore from 'Store/StoreContext';
 const CatalogFilterDepartment = (props) => {
   const classes = useStyles();
   const { clothingTypes } = props;
-  const { subCategory, setSubCategory } = UseStore();
+  const { subCategory, setSubCategory, typeFilter } = props;
 
   const handleClick = (e) => {
     if (subCategory === e) {
@@ -17,23 +17,28 @@ const CatalogFilterDepartment = (props) => {
     setSubCategory(e)
   }
   return (
-    <div className={clsx(classes.catalogFilter, {
-      'mt-2 mb-3': true
-    })}>
-      <h3 className={classes.title}>Men</h3>
-      <ul className='mt-2'>
+    <div
+      className={clsx(classes.catalogFilter, {
+        "mt-2 mb-3": true,
+      })}
+    >
+      <h3 className={classes.title}>{typeFilter}</h3>
+      <ul className="mt-2">
         {clothingTypes.map((clothingType, index) => (
           <li key={index}>
             <a
-              className={subCategory === clothingType.value ? classes.active : null}
-              onClick={() => handleClick(clothingType.value)}>
+              className={
+                subCategory === clothingType.value ? classes.active : null
+              }
+              onClick={() => handleClick(clothingType.value)}
+            >
               {clothingType.name}
             </a>
           </li>
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 

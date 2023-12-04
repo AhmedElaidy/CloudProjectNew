@@ -5,6 +5,10 @@ import PendingDesign from "./PendingDesign";
 
 const PendingDesigns = () => {
   const { pendingDesigns } = useStore();
+
+  const generatePendingProducts = () => {
+
+  }
   return (
     <div className="pr-5 pl-5">
       <h3 className="text-center mb-3" style={{ fontWeight: "700" }}>
@@ -23,16 +27,17 @@ const PendingDesigns = () => {
               style={{ borderRadius: "5px" }}
             >
               <PendingDesign
+                id={design.id}
                 link={design.id}
                 img={design.img}
                 name={design.name}
                 price={design.price}
+                generatePendingProducts={generatePendingProducts}
               />
             </Col>
           );
         })}
       </Row>
-      
     </div>
   );
 };

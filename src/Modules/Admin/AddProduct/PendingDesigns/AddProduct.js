@@ -53,7 +53,7 @@ const AddProduct = () => {
     ) {
       axios
         .post(
-          `http://192.168.1.215:5000/products`,
+          `http://192.168.1.76:5000/products`,
           {
             id,
             color: product.color,

@@ -4,41 +4,14 @@ import Row from "react-bootstrap/Row";
 import Product from "Components/Product";
 import CatalogListSortBy from "./CatalogListSortBy";
 import CatalogListPagination from "./CatalogListPagination";
-import UseStore from "Store/StoreContext";
-import {
-  filterCategory,
-  filterPrice,
-  filterColor,
-  filterName,
-} from "./CatalogListUtils";
-import axios from "axios";
-
 const CatalogList = (props) => {
   const { id } = props;
-  const {
-    subCategory,
-    valueMax,
-    valueMin,
-    color,
-    searchQuery,
-    products,
-  } = UseStore();
 
   const [sort, setSort] = useState("newest");
 
   const handleSort = (value) => {
     setSort(value);
   };
-
-  function filtery(product) {
-    console.log("product is ", product);
-    let category = filterCategory(product, subCategory);
-    let price = filterPrice(product, valueMin, valueMax);
-    let colors = filterColor(product, color);
-    let search = filterName(product, searchQuery);
-
-    return category && price && colors && search;
-  }
 
   function sortByHandle(a, b) {
     if (sort.value === "asc") {
@@ -61,33 +34,32 @@ const CatalogList = (props) => {
         <Col className="mb-4" xs={12}>
           <CatalogListSortBy handleSort={handleSort} value={sort} />
         </Col>
-        {products
-          .filter((product) => filtery(product))
-          .sort((a, b) => sortByHandle(a, b))
-          .map((product, index) => {
-            if (id === capitalize(product))
-              return (
-                <Col
-                  key={index * Math.random()}
-                  className="mb-4"
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  xl={3}
-                >
-                  <Product
-                    link={product._id}
-                    img={product.img}
-                    name={product.name}
-                    price={product.price}
-                  />
-                </Col>
-              );
+        {props.products
+          ?.sort((a, b) => sortByHandle(a, b))
+          ?.map((product, index) => {
+            return (
+              <Col
+                key={index * Math.random()}
+                className="mb-4"
+                xs={12}
+                sm={6}
+                md={4}
+                xl={3}
+              >
+                <Product
+                  link={product._id}
+                  img={product.img}
+                  name={product.name}
+                  price={product.price}
+                />
+              </Col>
+            );
           })}
         <Col className="mt-4" xs={12}>
           <CatalogListPagination
             numberOfPages={
-              products.filter((product) => capitalize(product) === id).length
+              props.products?.filter((product) => capitalize(product) === id)
+                .length
             }
           />
         </Col>

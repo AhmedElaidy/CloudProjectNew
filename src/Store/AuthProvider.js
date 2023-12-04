@@ -5,7 +5,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
     id: "",
     name: "",
-    userRole: "",
+    userRole: "regular",
     token: "",
   });
 

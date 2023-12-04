@@ -5,9 +5,9 @@ import clsx from 'clsx';
 import UseStore from 'Store/StoreContext';
 
 
-const CatalogFilterPrice = () => {
+const CatalogFilterPrice = (props) => {
   const classes = useStyles();
-  const { valueMin, setValueMin, valueMax, setValueMax } = UseStore();
+  const { valueMin, setValueMin, valueMax, setValueMax } = props;
 
   const handleChange = (value) => {
     setValueMin(value[0])

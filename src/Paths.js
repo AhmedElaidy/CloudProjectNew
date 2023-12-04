@@ -3,7 +3,7 @@ const Url = {
   HOME: "/clothingstore",
   Auth: "/clothingstore/auth",
   Product: "/clothingstore/product/:id",
-  Catalog: "/clothingstore/:id",
+  Catalog: "/clothingstore/products",
   Cart: "/clothingstore/cart",
   Checkout: "/clothingstore/checkout",
   MyDesigns: "/clothingstore/my-designs",

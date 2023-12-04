@@ -4,16 +4,14 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 export const StoreContext = createContext({});
 
 export const StoreContextProvider = ({ children }) => {
-  const [subCategory, setSubCategory] = useState("");
 
-  const [valueMin, setValueMin] = useState(5);
-  const [valueMax, setValueMax] = useState(150);
+ 
+  const [typeFilter, setTypeFilter] = useState("");
 
-  const [color, setColor] = useState("");
 
   const [cart, setCart] = useState([]);
 
-  const [searchQuery, setSearchQuery] = useState("");
+
   const [subTotal, setSubTotal] = useState(0);
   const [products, setProducts] = useState([]);
   const [MyDesigns, setMyDesigns] = useState([
@@ -93,35 +91,11 @@ export const StoreContextProvider = ({ children }) => {
     },
   ]);
 
-  useEffect(() => {
-    const getProducts = async () => {
-      await axios
-        .get(`http://192.168.1.215:5000/products`)
-        .then((response) => {
-          setProducts(response.data.products);
-        })
-        .catch((err) => {
-          console.log("err is ", err);
-        });
-    };
-    getProducts();
-  }, []);
-
   return (
     <StoreContext.Provider
       value={{
-        subCategory,
-        setSubCategory,
-        valueMin,
-        setValueMin,
-        valueMax,
-        setValueMax,
-        color,
-        setColor,
         cart,
         setCart,
-        searchQuery,
-        setSearchQuery,
         subTotal,
         setSubTotal,
         MyDesigns,
@@ -129,7 +103,9 @@ export const StoreContextProvider = ({ children }) => {
         products,
         setProducts,
         pendingDesigns,
-        setPendignDesigns
+        setPendignDesigns,
+        typeFilter,
+        setTypeFilter,
       }}
     >
       {children}

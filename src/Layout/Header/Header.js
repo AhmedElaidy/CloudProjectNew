@@ -17,16 +17,40 @@ const Header = () => {
   const history = useHistory();
   const classes = useStyles();
 
-  const { cart } = UseStore();
+  const { cart, setTypeFilter } = UseStore();
   const userContext = useContext(AuthContext);
   const { userRole } = userContext.user;
+
+  const onRegularLinksClick = (e) => {
+    console.log(e);
+    setTypeFilter(e);
+    history.push("/clothingstore/products");
+  };
 
   const RegularUserLinks = () => {
     return (
       <Fragment>
-        <NavLink linkAdress="/Men">Men</NavLink>
-        <NavLink linkAdress="/Women">Women</NavLink>
-        <NavLink linkAdress="/Kids">Kids</NavLink>
+        <h4
+          onClick={() => {
+            onRegularLinksClick("men");
+          }}
+        >
+          Men
+        </h4>
+        <h4
+          onClick={() => {
+            onRegularLinksClick("women");
+          }}
+        >
+          Women
+        </h4>
+        <h4
+          onClick={() => {
+            onRegularLinksClick("kids");
+          }}
+        >
+          Kids
+        </h4>
       </Fragment>
     );
   };
@@ -60,8 +84,6 @@ const Header = () => {
     }
     return null;
   };
-
-  console.log("user is ", userContext);
 
   const handleLogut = () => {
     userContext.logout();

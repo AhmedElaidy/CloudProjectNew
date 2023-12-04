@@ -6,7 +6,7 @@ import UseStore from 'Store/StoreContext';
 
 const CatalogFilterColors = (props) => {
   const classes = useStyles();
-  const { color, setColor } = UseStore();
+  const { color, setColor } = props;
 
 
   const handleClick = (value) => {

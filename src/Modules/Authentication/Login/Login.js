@@ -38,7 +38,7 @@ const Login = () => {
     e.preventDefault();
     if (isValid(user.email) && isValid(user.password)) {
       axios
-        .post(`http://192.168.1.215:5000/auth/login`, {
+        .post(`http://192.168.1.76:5000/auth/login`, {
           email: user.email,
           password: user.password,
         })
