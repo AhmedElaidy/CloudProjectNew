@@ -64,6 +64,7 @@ const Catalog = () => {
   };
 
   useEffect(() => {
+    console.log("inside useEffect of typeFilter ");
     setColor("");
     setSearchQuery("");
     setValueMax(150);
@@ -72,6 +73,7 @@ const Catalog = () => {
   }, [typeFilter]);
 
   useEffect(() => {
+    console.log("inside useEffect of typeFilter subCategory");
     let url = "http://192.168.1.76:5000/products";
 
     if (typeFilter) {

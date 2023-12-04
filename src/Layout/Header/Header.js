@@ -17,13 +17,20 @@ const Header = () => {
   const history = useHistory();
   const classes = useStyles();
 
-  const { cart, setTypeFilter } = UseStore();
+  const { cart, typeFilter, setTypeFilter } = UseStore();
   const userContext = useContext(AuthContext);
   const { userRole } = userContext.user;
 
   const onRegularLinksClick = (e) => {
     console.log(e);
-    setTypeFilter(e);
+    if (typeFilter == e) {
+      setTypeFilter("");
+      setTimeout(() => {
+        setTypeFilter(e);
+      }, 300);
+    } else {
+      setTypeFilter(e);
+    }
     history.push("/clothingstore/products");
   };
 
@@ -38,6 +45,7 @@ const Header = () => {
           Men
         </h4>
         <h4
+          className="mr-1 ml-1"
           onClick={() => {
             onRegularLinksClick("women");
           }}
