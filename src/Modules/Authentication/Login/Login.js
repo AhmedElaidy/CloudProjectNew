@@ -34,11 +34,11 @@ const Login = () => {
   };
 
   const handleLogin = (e) => {
+    console.log("process.env is ", process.env);
     e.preventDefault();
-    console.log("authContext is ", authContext);
     if (isValid(user.email) && isValid(user.password)) {
       axios
-        .post("http://192.168.1.76:5000/auth/login", {
+        .post(`http://192.168.1.215:5000/auth/login`, {
           email: user.email,
           password: user.password,
         })
@@ -54,7 +54,7 @@ const Login = () => {
             ? "designer"
             : "regular";
 
-            console.log("userRole is ", userRole);
+          console.log("userRole is ", userRole);
           authContext.login(
             res.data.id ? res.data.id : "",
             res.data.email,
