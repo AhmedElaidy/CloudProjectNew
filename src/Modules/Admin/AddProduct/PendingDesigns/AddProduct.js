@@ -35,53 +35,56 @@ const AddProduct = () => {
   };
 
   const onInputChange = (e) => {
-    setProduct((oldProduct) => {
-      return { ...oldProduct, [e.target.name]: e.target.value };
-    });
+    if (e.target.name == 'img'){
+      setProduct((oldProduct) => {
+        return { ...oldProduct, img: e.target.files[0] };
+      });
+    }else{
+      setProduct((oldProduct) => {
+        return { ...oldProduct, [e.target.name]: e.target.value };
+      });
+    }
   };
+
+
+  
+  
 
   const handleAddDesign = (e) => {
     e.preventDefault();
-    if (
-      isValid(product.color) &&
-      isValid(product.category) &&
-      product.img &&
-      isValid(product.name) &&
-      isValid(product.price) &&
-      isValid(product.desc) &&
-      isValid(product.subCategory)
-    ) {
-      axios
-        .post(
-          `http://192.168.1.26:5000/products`,
-          {
-            id,
-            color: product.color,
-            category: product.category,
-            img: product.img,
-            name: product.name,
-            price: product.price,
-            desc: product.desc,
-            subCategory: product.subCategory,
-            userRole,
-          },
-          { "Content-Type": "application/json" }
-        )
-        .then(() => {
-          setProduct({
-            name: "",
-            color: "",
-            category: "",
-            subCategory: "",
-            price: 0,
-            img: "",
-            desc: "",
-          });
+  
+    const formData = new FormData();
+    formData.append('img', product.img);
+    formData.append('name', product.name);
+    formData.append('color', product.color);
+    formData.append('category', product.category);
+    formData.append('subCategory', product.subCategory);
+    formData.append('price', product.price);
+    formData.append('desc', product.desc);
+    formData.append('userRole', userRole);
+  
+    axios
+      .post('http://192.168.1.26:5000/products', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(() => {
+        setProduct({
+          name: '',
+          color: '',
+          category: '',
+          subCategory: '',
+          price: 0,
+          img: '',
+          desc: '',
         });
-    } else {
-      setIsDataNotCompleted(true);
-    }
+      })
+      .catch((error) => {
+        console.error('Error adding product', error);
+      });
   };
+  
 
   const CategoryChoice = () => {
     const categoryOptions = [
@@ -239,7 +242,6 @@ const AddProduct = () => {
           <InputField
             placeholder="Img Link"
             name="img"
-            value={product.img}
             onChange={onInputChange}
             type="file"
             accept="image/*"

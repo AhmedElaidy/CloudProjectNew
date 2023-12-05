@@ -13,7 +13,7 @@ const Product = (props) => {
       className={clsx(classes.product, {
         'w-100 h-100 ': true
       })}>
-      {/* <img className='w-100 border-rounded' src={`${process.env.PUBLIC_URL}/images/product/${img}`} alt="product img" /> */}
+      <img className='w-100 border-rounded' src={`data:image/jpeg;base64,${img}`} alt="Product" />
       <div className={classes.textContainer}>
         <h5 className='mt-1'>{name}</h5>
         <h6 className='mt-2'>{price}$</h6>

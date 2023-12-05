@@ -31,7 +31,11 @@ const Product = () => {
     <Container fluid="md">
       <Row className="mt-4 ">
         <Col xs={12} lg={6}>
+
+
           <ProductViewer img={product.img} id={id} />
+
+
         </Col>
         <Col xs={12} lg={6}>
           <ProductSelection current={product} title={product.name} id={id} />

@@ -1,8 +1,7 @@
-import ImageGallery from "react-image-gallery";
 import React from "react";
+import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { makeStyles } from "@material-ui/styles";
-import "swiper/swiper-bundle.css";
 
 const ProductViewer = (props) => {
   const classes = useStyles();
@@ -11,8 +10,8 @@ const ProductViewer = (props) => {
 
   if (img) {
     images.push({
-      original: img,
-      thumbnail: img,
+      original: `data:image/jpeg;base64,${img}`,
+      thumbnail: `data:image/jpeg;base64,${img}`,
     });
   }
 
@@ -23,7 +22,8 @@ const ProductViewer = (props) => {
       showPlayButton={false}
       thumbnailPosition={"bottom"}
       showNav={false}
-      showFullscreenButton={false}
+      showFullscreenButton={true}
+      showThumbnails={false}
     />
   );
 };
@@ -36,10 +36,11 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "left",
     },
     "& .image-gallery-image": {
-      objectFit: "cover",
+      objectFit: "contain",  
+      maxHeight: "500px",  
     },
     "& .image-gallery-slides img": {
-      height: 500,
+      maxHeight: "500px",  
     },
   },
 }));
