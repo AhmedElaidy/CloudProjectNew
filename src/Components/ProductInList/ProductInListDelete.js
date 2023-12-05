@@ -10,13 +10,7 @@ const ProductInList = (props) => {
 
   const { cart, setCart } = useStore();
 
-  const handleDelete = async() => {
-    const newCart = cart;
-    newCart.splice(props.index, 1);
-    setCart(newCart);
-    await props.handleRefresh();
-    
-  };
+  const handleDelete = async () => {};
 
   return (
     <div className={`${classes.delete} mt-auto`}>
@@ -26,6 +20,10 @@ const ProductInList = (props) => {
         background="transparent"
         onClick={handleDelete}
       />
+      <div style={{ gap: "5px", display: "grid", placeItems: "center" }}>
+        <p className={`${classes.p}`}>+</p>
+        <p className={`${classes.p}`}>-</p>
+      </div>
     </div>
   );
 };
@@ -33,6 +31,20 @@ const ProductInList = (props) => {
 const useStyles = makeStyles((theme) => ({
   delete: {
     marginLeft: "-4px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  p: {
+    fontWeight: "900",
+    fontSize: "xx-large",
+    color: "white",
+    backgroundColor: "rgb(64, 50, 52) !important",
+    textAlign: "center",
+    width: "3rem",
+    height: "3rem",
+
+    borderRadius: "50%",
   },
 }));
 

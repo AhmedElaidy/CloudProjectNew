@@ -1,9 +1,9 @@
 import AuthContext from "./AuthContext";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
-    id: "",
+    _id: "",
     name: "",
     userRole: "regular",
     token: "",
@@ -11,18 +11,22 @@ const AuthProvider = ({ children }) => {
 
   const authContext = {
     user,
-    login: (id, name, token, userRole) => {
-      setUser({ id, name, token, userRole });
+    login: (_id, name, token, userRole) => {
+      setUser({ _id, name, token, userRole });
     },
     logout: () => {
       setUser({
-        id: "",
+        _id: "",
         name: "",
         userRole: "",
         token: "",
       });
     },
   };
+
+  useEffect(()=>{
+    console.log('user is ',user)
+  },[user])
 
   return (
     <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
