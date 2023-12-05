@@ -12,15 +12,15 @@ import AuthProvider from "Store/AuthProvider";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <StoreContextProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <StoreContextProvider>
           <Router>
             <Layout>
               <RenderRoutes />
             </Layout>
           </Router>
-        </AuthProvider>
-      </StoreContextProvider>
+        </StoreContextProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

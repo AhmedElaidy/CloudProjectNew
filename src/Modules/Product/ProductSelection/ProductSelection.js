@@ -1,21 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import ProductSelectionColor from "./ProductSelectionColor";
 import ButtonBlock from "Components/Buttons/ButtonBlock";
 import UseStore from "Store/StoreContext";
 import { withRouter } from "react-router-dom";
 import ProductSelectionText from "./ProductSelectionText";
-import { useEffect } from "react";
 import ProductSelectionGraphics from "./ProductSelectionGraphics";
+import axios from "axios";
+import AuthContext from "Store/AuthContext";
 
 const Product = (props) => {
+  const user = useContext(AuthContext);
+
   const classes = useStyles();
   const { current } = props;
   const [prod, setProd] = useState({ ...current, text: "", graphics: {} });
-  const { cart, setCart } = UseStore();
+  const { getCurrentCart } = UseStore();
 
-  const addToCart = () => {
-    setCart([prod, ...cart]);
+  const addToCart = async () => {
+    console.log("current is ", current);
+    await axios
+      .post(`http://192.168.1.26:5000/cart/${user.user._id}/add`, {
+        productId: current._id,
+        quantity: 1,
+      })
+      .catch((err) => {
+        console.log("err is ", err);
+      });
+    getCurrentCart();
   };
 
   const setColor = (e) => {
@@ -35,7 +47,12 @@ const Product = (props) => {
   const setGraphics = (graphic) => {
     setProd((prevProd) => ({
       ...prevProd,
-      graphics: {src: graphic.src, alt:graphic.alt, width:graphic.width,height:graphic.height},
+      graphics: {
+        src: graphic.src,
+        alt: graphic.alt,
+        width: graphic.width,
+        height: graphic.height,
+      },
     }));
   };
 
@@ -79,9 +96,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "auto",
     maxWidth: "300px",
-    height: '44px',
-    backgroundColor: 'rgb(85 30 30) !important',
-    color: 'rgb(255 255 255) !important',
-    borderRadius:"5px"
+    height: "44px",
+    backgroundColor: "rgb(85 30 30) !important",
+    color: "rgb(255 255 255) !important",
+    borderRadius: "5px",
   },
 }));

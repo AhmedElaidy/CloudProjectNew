@@ -19,9 +19,14 @@ const Cart = () => {
   useEffect(() => {
     let localSubTotal = 0;
     cart.map((product) => {
-      localSubTotal += Number(product.price);
+      const quantity = product.quantity;
+      const price = Number(product.productId.price) * Number(quantity);
+      console.log("product.productId is ", product.productId);
+      console.log("price is ", price);
+      console.log("quantity is ", quantity);
+      localSubTotal += price;
     });
-    setSubTotal(localSubTotal);
+    setSubTotal(localSubTotal.toFixed(2));
   });
 
   return (
@@ -39,7 +44,7 @@ const Cart = () => {
                 return (
                   <li
                     className="list-group-item p-0 mb-3 border-0 "
-                    key={product.price * Math.random()}
+                    key={product.productId.price * Math.random()}
                   >
                     <ProductInList
                       product={product}

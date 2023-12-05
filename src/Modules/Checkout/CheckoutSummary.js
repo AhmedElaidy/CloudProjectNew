@@ -24,12 +24,12 @@ const CheckoutSummary = () => {
       </div>
       <div className="d-flex ">
         <p>Shipping:</p>
-        <p className="ml-auto">{subTotal > 0 ? "15.88$" : "0"}</p>
+        <p className="ml-auto">{subTotal > 0 ? "16$" : "0"}</p>
       </div>
       <div className="d-flex mt-4">
         <h6>Total:</h6>
         <h6 className="ml-auto">
-          {subTotal > 0 ? subTotal + 15.88 + "$" : "00"}
+          {subTotal > 0 ? (+subTotal + 16).toFixed(2) + "$" : "00"}
         </h6>
       </div>
       <div className="mt-3">

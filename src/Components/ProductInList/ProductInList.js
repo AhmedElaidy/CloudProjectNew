@@ -10,9 +10,7 @@ import ProductInListProductImage from "./ProductInListProductImage";
 
 const ProductInList = (props) => {
   const classes = useStyles();
-  const { category, color, graphics, id, img, name, price, subCategory, text } =
-    props.product;
-
+  console.log("props.product is ", props.product);
   return (
     <div
       className={clsx(classes.product, {
@@ -21,18 +19,14 @@ const ProductInList = (props) => {
     >
       <Row>
         <Col xs={12} sm={4} lg={3}>
-          <ProductInListProductImage img={img} />
+          <ProductInListProductImage img={props.product.productId.img} />
         </Col>
         <Col className="d-flex flex-column" xs={9} sm={6} lg={7}>
-          <ProductInListDetails
-            price={price}
-            color={color}
-            name={name}
-            text={text}
-            graphics={graphics}
-            category={category}
+          <ProductInListDetails product={props.product} quantity={props.product.quantity} />
+          <ProductInListDelete
+            index={props.product.productId.index}
+            handleRefresh={props.handleRefresh}
           />
-          <ProductInListDelete index={props.index} handleRefresh={props.handleRefresh}/>
         </Col>
       </Row>
     </div>
