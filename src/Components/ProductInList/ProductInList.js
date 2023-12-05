@@ -7,9 +7,11 @@ import ProductInListQuantity from "./ProductInListQuantity";
 import ProductInListDetails from "./ProductInListDetails";
 import ProductInListDelete from "./ProductInListDelete";
 import ProductInListProductImage from "./ProductInListProductImage";
+import useStore from "Store/StoreContext";
 
 const ProductInList = (props) => {
   const classes = useStyles();
+
   console.log("props.product is ", props.product);
   return (
     <div
@@ -22,11 +24,11 @@ const ProductInList = (props) => {
           <ProductInListProductImage img={props.product.productId.img} />
         </Col>
         <Col className="d-flex flex-column" xs={9} sm={6} lg={7}>
-          <ProductInListDetails product={props.product} quantity={props.product.quantity} />
-          <ProductInListDelete
-            index={props.product.productId.index}
-            handleRefresh={props.handleRefresh}
+          <ProductInListDetails
+            product={props.product}
+            quantity={props.product.quantity}
           />
+          <ProductInListDelete productId={props.productId} />
         </Col>
       </Row>
     </div>

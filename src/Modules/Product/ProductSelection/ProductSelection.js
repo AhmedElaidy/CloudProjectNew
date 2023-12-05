@@ -14,7 +14,12 @@ const Product = (props) => {
 
   const classes = useStyles();
   const { current } = props;
-  const [prod, setProd] = useState({ ...current, text: "", graphics: {} });
+  const [prod, setProd] = useState({
+    ...current,
+    text: "",
+    graphics: { alt: "" },
+  });
+  console.log("prod is ", prod);
   const { getCurrentCart } = UseStore();
 
   const addToCart = async () => {
@@ -23,6 +28,9 @@ const Product = (props) => {
       .post(`http://192.168.1.26:5000/cart/${user.user._id}/add`, {
         productId: current._id,
         quantity: 1,
+        color: prod.color,
+        text: prod.text,
+        design: prod.graphics.alt,
       })
       .catch((err) => {
         console.log("err is ", err);

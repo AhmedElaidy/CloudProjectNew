@@ -9,12 +9,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Url from "Paths";
 
 const Cart = () => {
-  const history = useHistory();
   const { cart, setSubTotal } = UseStore();
-
-  const handleRefresh = () => {
-    history.push(`${Url.HOME}/cart`);
-  };
 
   useEffect(() => {
     let localSubTotal = 0;
@@ -41,16 +36,13 @@ const Cart = () => {
           <ul className="list-group">
             {cart.length > 0 ? (
               cart.map((product, index) => {
+                console.log("product is ", product);
                 return (
                   <li
                     className="list-group-item p-0 mb-3 border-0 "
                     key={product.productId.price * Math.random()}
                   >
-                    <ProductInList
-                      product={product}
-                      index={index}
-                      handleRefresh={handleRefresh}
-                    />
+                    <ProductInList product={product} productId={product._id} />
                   </li>
                 );
               })
