@@ -8,12 +8,17 @@ import axios from "axios";
 
 const PendingDesign = (props) => {
   const classes = useStyles();
-  const { id, img, price, name, link } = props;
-  const approveDesign = () => {
-    console.log("approve");
+  const { _id, name, price, img } = props.design;
+
+  console.log("props are ", props);
+  const approveDesign = async () => {
+    await axios.put(`http://192.168.1.26:5000/products/${_id} `, {
+      status: "approved",
+    });
+    props.generatePendingProducts();
   };
-  const declineDesign = () => {
-    axios.delete(`http://192.168.1.76:5000/products/${id}`);
+  const declineDesign = async () => {
+    await axios.delete(`http://192.168.1.26:5000/products/${_id}`);
     props.generatePendingProducts();
   };
   return (

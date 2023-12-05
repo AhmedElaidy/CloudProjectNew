@@ -14,7 +14,7 @@ const Product = () => {
   const [product, setProduct] = useState();
 
   useEffect(() => {
-    let url = `http://192.168.1.76:5000/products/product/${id}`;
+    let url = `http://192.168.1.26:5000/products/product/${id}`;
     const getProduct = async (url) => {
       await axios
         .get(url)

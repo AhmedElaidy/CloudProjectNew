@@ -2,10 +2,7 @@ import React from 'react';
 import InputField from 'Components/InputField/InputField';
 
 const CityField = () => {
-  return (
-    <InputField placeholder='City' />
-
-  )
+  return <InputField placeholder="City" required />;
 }
 
 

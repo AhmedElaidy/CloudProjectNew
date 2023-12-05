@@ -11,8 +11,8 @@ import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 
 const CreateDesign = () => {
-    const userContext = useContext(AuthContext);
-    const { id, userRole } = userContext.user;
+  const userContext = useContext(AuthContext);
+  const { id, userRole } = userContext.user;
   const [product, setProduct] = useState({
     name: "",
     color: "",
@@ -48,7 +48,7 @@ const CreateDesign = () => {
     if (
       isValid(product.color) &&
       isValid(product.category) &&
-      isValid(product.img) &&
+      product.img &&
       isValid(product.name) &&
       isValid(product.price) &&
       isValid(product.desc) &&
@@ -56,7 +56,7 @@ const CreateDesign = () => {
     ) {
       axios
         .post(
-          `http://192.168.1.76:5000/products`,
+          `http://192.168.1.26:5000/products`,
           {
             id,
             color: product.color,
@@ -218,6 +218,7 @@ const CreateDesign = () => {
           value={product.name}
           name="name"
           onChange={onInputChange}
+          required
         />
         <div className="d-flex justify-content-around">
           <ColorChoice />
@@ -230,13 +231,16 @@ const CreateDesign = () => {
           value={product.price}
           onChange={onInputChange}
           type="number"
+          required
         />
         <InputField
-          placeholder="Img Link"
+          placeholder="Img"
           name="img"
           value={product.img}
           onChange={onInputChange}
-          type="text"
+          type="file"
+          accept="image/*"
+          required
         />
         <InputField
           placeholder="Description"
@@ -244,6 +248,7 @@ const CreateDesign = () => {
           name="desc"
           type="text"
           onChange={onInputChange}
+          required
         />
         <ButtonBlock
           type="submit"

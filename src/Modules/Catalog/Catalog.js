@@ -17,15 +17,15 @@ const Catalog = () => {
   const [color, setColor] = useState("");
   const [products, setProducts] = useState([]);
   const submitFilter = () => {
-    let url = "http://192.168.1.76:5000/products";
+    let url = "http://192.168.1.26:5000/products";
 
     // Check each condition and append query parameters if they are true
     if (typeFilter) {
-      url += `/${typeFilter}`;
+      url += `/filter/${typeFilter}`;
     }
 
     if (!typeFilter) {
-      url += `/men`;
+      url += `/filter/men`;
     }
 
     if (subCategory) {
@@ -74,20 +74,21 @@ const Catalog = () => {
 
   useEffect(() => {
     console.log("inside useEffect of typeFilter subCategory");
-    let url = "http://192.168.1.76:5000/products";
-
+    let url = "http://192.168.1.26:5000/products";
+    
     if (typeFilter) {
-      url += `/${typeFilter}`;
+      url += `/filter/${typeFilter}`;
     }
-
+    
     if (!typeFilter) {
-      url += `/men`;
+      url += `/filter/men`;
     }
-
+    
     if (subCategory) {
       url += `/${subCategory}`;
     }
-    console.log("url is ", url);
+    
+    console.log("url is ",url);
     getProducts(url);
   }, [typeFilter, subCategory]);
 

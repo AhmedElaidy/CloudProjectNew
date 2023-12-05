@@ -52,7 +52,7 @@ export const StoreContextProvider = ({ children }) => {
       img: ["https://i.ibb.co/VgCvZ4R/pngimg-com-apple-logo-PNG19688.png"],
     },
   ]);
-  const [pendingDesigns, setPendignDesigns] = useState([
+  const [importedPendingDesigns, setImportedPendingDesigns] = useState([
     {
       id: 1,
       name: "google logo",
@@ -102,8 +102,8 @@ export const StoreContextProvider = ({ children }) => {
         setMyDesigns,
         products,
         setProducts,
-        pendingDesigns,
-        setPendignDesigns,
+        importedPendingDesigns,
+        setImportedPendingDesigns,
         typeFilter,
         setTypeFilter,
       }}

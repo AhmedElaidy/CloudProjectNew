@@ -53,7 +53,7 @@ const Register = () => {
     ) {
       axios
         .post(
-          "http://192.168.1.76:5000/auth/signup",
+          "http://192.168.1.26:5000/auth/signup",
           {
             fullName: user.fullName,
             email: user.email,
@@ -107,6 +107,7 @@ const Register = () => {
       )}
       <form onSubmit={handleRegister}>
         <InputField
+          required
           placeholder="Full Name"
           name="fullName"
           onChange={onInputChange}
@@ -115,6 +116,7 @@ const Register = () => {
           value={user.fullName}
         />
         <InputField
+          required
           placeholder="Email"
           name="email"
           onChange={onInputChange}
@@ -123,6 +125,7 @@ const Register = () => {
           value={user.email}
         />
         <InputField
+          required
           placeholder="Password"
           name="password"
           onChange={onInputChange}
@@ -131,6 +134,7 @@ const Register = () => {
           value={user.password}
         />
         <InputField
+          required
           placeholder="Phone Number"
           name="phoneNumber"
           onChange={onInputChange}
@@ -139,6 +143,7 @@ const Register = () => {
           value={user.phoneNumber}
         />
         <InputField
+          required
           placeholder="City"
           name="city"
           onChange={onInputChange}
@@ -147,6 +152,7 @@ const Register = () => {
           value={user.city}
         />
         <InputField
+          required
           placeholder="Address"
           name="address"
           onChange={onInputChange}
@@ -156,6 +162,7 @@ const Register = () => {
         />
         <div className="mt-4  mb-3 d-flex ml-4">
           <input
+            required
             className="form-check-input"
             type="checkbox"
             id="designerCheckbox"

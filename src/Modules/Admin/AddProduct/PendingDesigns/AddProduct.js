@@ -45,7 +45,7 @@ const AddProduct = () => {
     if (
       isValid(product.color) &&
       isValid(product.category) &&
-      isValid(product.img) &&
+      product.img &&
       isValid(product.name) &&
       isValid(product.price) &&
       isValid(product.desc) &&
@@ -53,7 +53,7 @@ const AddProduct = () => {
     ) {
       axios
         .post(
-          `http://192.168.1.76:5000/products`,
+          `http://192.168.1.26:5000/products`,
           {
             id,
             color: product.color,
@@ -221,6 +221,7 @@ const AddProduct = () => {
             value={product.name}
             name="name"
             onChange={onInputChange}
+            required
           />
           <div className="d-flex justify-content-around">
             <ColorChoice />
@@ -233,13 +234,16 @@ const AddProduct = () => {
             name="price"
             type="number"
             onChange={onInputChange}
+            required
           />
           <InputField
             placeholder="Img Link"
-            value={product.img}
             name="img"
-            type="text"
+            value={product.img}
             onChange={onInputChange}
+            type="file"
+            accept="image/*"
+            required
           />
           <InputField
             placeholder="Description"
@@ -247,6 +251,7 @@ const AddProduct = () => {
             name="desc"
             type="text"
             onChange={onInputChange}
+            required
           />
           <ButtonBlock
             type="submit"

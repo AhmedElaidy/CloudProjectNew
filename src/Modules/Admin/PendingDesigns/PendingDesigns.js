@@ -1,21 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import useStore from "Store/StoreContext";
 import PendingDesign from "./PendingDesign";
+import axios from "axios";
 
 const PendingDesigns = () => {
-  const { pendingDesigns } = useStore();
+  const [pendingDesigns, setPendingDesigns] = useState([]);
 
-  const generatePendingProducts = () => {
-
-  }
+  const generatePendingProducts = async () => {
+    await axios
+      .get(`http://192.168.1.26:5000/products/pending`)
+      .then((response) => {
+        console.log("response is ", response);
+        setPendingDesigns(response.data.products);
+      })
+      .catch((err) => {
+        console.log("err is ", err);
+      });
+  };
+  useEffect(() => {
+    generatePendingProducts();
+  }, []);
   return (
     <div className="pr-5 pl-5">
       <h3 className="text-center mb-3" style={{ fontWeight: "700" }}>
         Pending Designs
       </h3>
       <Row className=" d-flex justify-content-center">
-        {pendingDesigns.map((design, index) => {
+        {pendingDesigns?.map((design, index) => {
           return (
             <Col
               key={index * Math.random()}
@@ -27,11 +39,7 @@ const PendingDesigns = () => {
               style={{ borderRadius: "5px" }}
             >
               <PendingDesign
-                id={design.id}
-                link={design.id}
-                img={design.img}
-                name={design.name}
-                price={design.price}
+                design={design}
                 generatePendingProducts={generatePendingProducts}
               />
             </Col>

@@ -27,7 +27,7 @@ const Header = () => {
       setTypeFilter("");
       setTimeout(() => {
         setTypeFilter(e);
-      }, 300);
+      }, 50);
     } else {
       setTypeFilter(e);
     }
@@ -37,28 +37,30 @@ const Header = () => {
   const RegularUserLinks = () => {
     return (
       <Fragment>
-        <h4
+        <p
           onClick={() => {
             onRegularLinksClick("men");
           }}
+          className={clsx(classes.navLink)}
         >
           Men
-        </h4>
-        <h4
-          className="mr-1 ml-1"
+        </p>
+        <p
+          className={`${clsx(classes.navLink)} mr-2 ml-2`}
           onClick={() => {
             onRegularLinksClick("women");
           }}
         >
           Women
-        </h4>
-        <h4
+        </p>
+        <p
+          className={clsx(classes.navLink)}
           onClick={() => {
             onRegularLinksClick("kids");
           }}
         >
           Kids
-        </h4>
+        </p>
       </Fragment>
     );
   };
@@ -214,6 +216,15 @@ const useStyles = makeStyles((theme) => ({
       verticalAlign: "baseline",
       height: 25,
     },
+  },
+  navLink: {
+    color: "#687774!important",
+    display: "block",
+    padding: "0.5rem 1rem",
+    fontSize: "18px",
+    lineHeight: "28px",
+    cursor: "pointer"
+
   },
 }));
 

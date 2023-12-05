@@ -14,22 +14,22 @@ const CheckoutBillingAddress = () => {
       <h5>Billing address</h5>
       <Row className='mt-3 '>
         <Col className='mb-2' xs={12} md={6}>
-          <InputField placeholder='Name' />
+          <InputField placeholder='Name' required/>
         </Col>
         <Col className='mb-2' xs={12} md={6}>
-          <InputField placeholder='Phone Number' />
+          <InputField placeholder='Phone Number' required/>
         </Col>
         <Col className='mb-2' xs={12} md={6}>
-          <InputField placeholder='Country' />
+          <InputField placeholder='Country' required/>
         </Col>
         <Col className='mb-2' xs={12} md={6}>
-          <InputField placeholder='City' />
+          <InputField placeholder='City' required/>
         </Col>
         <Col className='mb-2' xs={12} md={6}>
-          <InputField placeholder='Address' />
+          <InputField placeholder='Address' required/>
         </Col>
         <Col className='mb-2' xs={12} md={6}>
-          <InputField placeholder='Zip Code' />
+          <InputField placeholder='Zip Code' required/>
         </Col>
       </Row>
     </div>

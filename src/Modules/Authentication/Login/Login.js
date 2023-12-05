@@ -38,7 +38,7 @@ const Login = () => {
     e.preventDefault();
     if (isValid(user.email) && isValid(user.password)) {
       axios
-        .post(`http://192.168.1.76:5000/auth/login`, {
+        .post(`http://192.168.1.26:5000/auth/login`, {
           email: user.email,
           password: user.password,
         })
@@ -92,6 +92,7 @@ const Login = () => {
           name="email"
           value={user.email}
           onChange={onInputChange}
+          required
         />
         <InputField
           icon="/icons/password/passwordBlack.svg"
@@ -100,6 +101,7 @@ const Login = () => {
           name="password"
           value={user.password}
           onChange={onInputChange}
+          required
         />
         <div
           className={clsx(classes.check, {

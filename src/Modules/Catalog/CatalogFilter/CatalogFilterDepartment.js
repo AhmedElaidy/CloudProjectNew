@@ -1,8 +1,7 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/styles';
-import clsx from 'clsx';
-import UseStore from 'Store/StoreContext';
-
+import React from "react";
+import { makeStyles } from "@material-ui/styles";
+import clsx from "clsx";
+import UseStore from "Store/StoreContext";
 
 const CatalogFilterDepartment = (props) => {
   const classes = useStyles();
@@ -11,18 +10,18 @@ const CatalogFilterDepartment = (props) => {
 
   const handleClick = (e) => {
     if (subCategory === e) {
-      setSubCategory('')
+      setSubCategory("");
       return;
     }
-    setSubCategory(e)
-  }
+    setSubCategory(e);
+  };
   return (
     <div
       className={clsx(classes.catalogFilter, {
         "mt-2 mb-3": true,
       })}
     >
-      <h3 className={classes.title}>{typeFilter}</h3>
+      <h3 className={classes.title}>{typeFilter ? typeFilter : "Men"}</h3>
       <ul className="mt-2">
         {clothingTypes.map((clothingType, index) => (
           <li key={index}>
@@ -39,30 +38,29 @@ const CatalogFilterDepartment = (props) => {
       </ul>
     </div>
   );
-}
-
+};
 
 const useStyles = makeStyles((theme) => ({
   active: {
     color: theme.colors.black,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   catalogFilter: {
-    '& ul': {
-      '& li': {
-        listStyleType: 'none',
+    "& ul": {
+      "& li": {
+        listStyleType: "none",
         fontSize: 12,
-        lineHeight: '18px',
+        lineHeight: "18px",
         fontWeight: 500,
         marginBottom: 2,
-        '& a': {
+        "& a": {
           color: theme.colors.darkGrey,
-          textDecoration: 'none',
-          cursor: 'pointer',
-          '&:hover': {
-            color: '#999!important'
-          }
-        }
+          textDecoration: "none",
+          cursor: "pointer",
+          "&:hover": {
+            color: "#999!important",
+          },
+        },
       },
     },
   },
