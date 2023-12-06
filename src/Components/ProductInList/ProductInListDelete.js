@@ -18,7 +18,7 @@ const ProductInListDelete = (props) => {
 
   const handleDelete = async () => {
     await axios
-      .post(`http://192.168.1.26:5000/cart/${id}/remove`, {
+      .post(`http://192.168.1.217:5000/cart/${id}/remove`, {
         productId: props.productId,
       })
       .catch((err) => {
@@ -28,7 +28,7 @@ const ProductInListDelete = (props) => {
   };
   const handleIncreaseDecrease = async (type) => {
     await axios
-      .post(`http://192.168.1.26:5000/cart/${id}/update-quantity`, {
+      .post(`http://192.168.1.217:5000/cart/${id}/update-quantity`, {
         productId: props.productId,
         quantityDelta: type == "increase" ? 1 : -1,
       })

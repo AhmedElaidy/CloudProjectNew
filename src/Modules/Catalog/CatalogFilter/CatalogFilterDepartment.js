@@ -21,7 +21,7 @@ const CatalogFilterDepartment = (props) => {
         "mt-2 mb-3": true,
       })}
     >
-      <h3 className={classes.title}>{typeFilter ? typeFilter : "Men"}</h3>
+      <h3 className={classes.title}>Categories</h3>
       <ul className="mt-2">
         {clothingTypes.map((clothingType, index) => (
           <li key={index}>

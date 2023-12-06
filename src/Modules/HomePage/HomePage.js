@@ -17,7 +17,6 @@ const HomePage = () => {
       <Fragment>
         <HomePageBanner />
         <HomePageSection />
-        <HomePageNewRelease />
       </Fragment>
     );
   }

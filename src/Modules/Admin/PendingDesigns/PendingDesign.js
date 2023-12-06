@@ -12,13 +12,13 @@ const PendingDesign = (props) => {
 
   console.log("props are ", props);
   const approveDesign = async () => {
-    await axios.put(`http://192.168.1.26:5000/products/${_id} `, {
+    await axios.put(`http://192.168.1.217:5000/products/${_id} `, {
       status: "approved",
     });
     props.generatePendingProducts();
   };
   const declineDesign = async () => {
-    await axios.delete(`http://192.168.1.26:5000/products/${_id}`);
+    await axios.delete(`http://192.168.1.217:5000/products/${_id}`);
     props.generatePendingProducts();
   };
   return (

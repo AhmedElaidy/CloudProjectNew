@@ -5,7 +5,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
     _id: "",
     name: "",
-    userRole: "regular",
+    userRole: "",
     token: "",
   });
 
@@ -24,9 +24,9 @@ const AuthProvider = ({ children }) => {
     },
   };
 
-  useEffect(()=>{
-    console.log('user is ',user)
-  },[user])
+  useEffect(() => {
+    console.log("user is ", user);
+  }, [user]);
 
   return (
     <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>

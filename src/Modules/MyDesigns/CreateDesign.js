@@ -56,7 +56,7 @@ const CreateDesign = () => {
     ) {
       axios
         .post(
-          `http://192.168.1.26:5000/products`,
+          `http://192.168.1.217:5000/products`,
           {
             id,
             color: product.color,
@@ -92,6 +92,9 @@ const CreateDesign = () => {
       { id: 2, label: "Women", value: "women" },
       { id: 3, label: "Kids", value: "kids" },
     ];
+
+    const { userRole } = useContext(AuthContext);
+
     return (
       <Dropdown isOpen={isOpen} toggle={toggle} className="mt-3">
         <DropdownToggle
@@ -206,58 +209,65 @@ const CreateDesign = () => {
       }, 3000);
     }
   }, [isDataNotCompleted]);
-  return (
-    <div className="d-flex justify-content-center">
-      <form
-        onSubmit={handleCreateDesign}
-        className="w-50"
-        style={{ minWidth: "250px" }}
-      >
-        <InputField
-          placeholder="Name"
-          value={product.name}
-          name="name"
-          onChange={onInputChange}
-          required
-        />
-        <div className="d-flex justify-content-around">
-          <ColorChoice />
-          <CategoryChoice />
-          <SubCategoryChoice />
-        </div>
-        <InputField
-          placeholder="Price"
-          name="price"
-          value={product.price}
-          onChange={onInputChange}
-          type="number"
-          required
-        />
-        <InputField
-          placeholder="Img"
-          name="img"
-          value={product.img}
-          onChange={onInputChange}
-          type="file"
-          accept="image/*"
-          required
-        />
-        <InputField
-          placeholder="Description"
-          value={product.desc}
-          name="desc"
-          type="text"
-          onChange={onInputChange}
-          required
-        />
-        <ButtonBlock
-          type="submit"
-          text="Request Admin Confirmation"
-          style={{ margin: "15px 0" }}
-        />
-      </form>
-    </div>
-  );
+
+  if (userRole?.toLowerCase() !== "designer") {
+    return (
+      <h3 className="text-center"> You Are Not Authorized To See This Page</h3>
+    );
+  } else {
+    return (
+      <div className="d-flex justify-content-center">
+        <form
+          onSubmit={handleCreateDesign}
+          className="w-50"
+          style={{ minWidth: "250px" }}
+        >
+          <InputField
+            placeholder="Name"
+            value={product.name}
+            name="name"
+            onChange={onInputChange}
+            required
+          />
+          <div className="d-flex justify-content-around">
+            <ColorChoice />
+            <CategoryChoice />
+            <SubCategoryChoice />
+          </div>
+          <InputField
+            placeholder="Price"
+            name="price"
+            value={product.price}
+            onChange={onInputChange}
+            type="number"
+            required
+          />
+          <InputField
+            placeholder="Img"
+            name="img"
+            value={product.img}
+            onChange={onInputChange}
+            type="file"
+            accept="image/*"
+            required
+          />
+          <InputField
+            placeholder="Description"
+            value={product.desc}
+            name="desc"
+            type="text"
+            onChange={onInputChange}
+            required
+          />
+          <ButtonBlock
+            type="submit"
+            text="Request Admin Confirmation"
+            style={{ margin: "15px 0" }}
+          />
+        </form>
+      </div>
+    );
+  }
 };
 
 export default CreateDesign;

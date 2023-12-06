@@ -55,14 +55,6 @@ const CatalogList = (props) => {
               </Col>
             );
           })}
-        <Col className="mt-4" xs={12}>
-          <CatalogListPagination
-            numberOfPages={
-              props.products?.filter((product) => capitalize(product) === id)
-                .length
-            }
-          />
-        </Col>
       </Row>
     </div>
   );

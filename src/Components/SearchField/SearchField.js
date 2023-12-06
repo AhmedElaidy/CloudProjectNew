@@ -7,16 +7,9 @@ import { useHistory } from "react-router-dom";
 import useStore from "Store/StoreContext";
 
 const SearchField = (props) => {
-  const [searchInput, setSearchInput] = useState();
-  const { searchQuery, setSearchQuery } = useStore();
+  const { searchQuery, setSearchQuery } = props;
 
   const classes = useStyles();
-
-  const handleSearch = () => {
-    if (searchInput.trim() !== searchQuery) {
-      setSearchQuery(searchInput.trim());
-    }
-  };
 
   return (
     <InputGroup className="align-items-center" style={{ marginTop: "1rem" }}>
@@ -24,15 +17,9 @@ const SearchField = (props) => {
         as="input"
         className={classes.inputField}
         placeholder="Search"
-        onChange={(e) => setSearchInput(e.target.value)}
-        value={searchInput}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        value={searchQuery}
       />
-      <InputGroup.Append
-        onClick={handleSearch}
-        className={classes.buttonContainer}
-      >
-        <ButtonRound icon="/icons/search.svg" />
-      </InputGroup.Append>
     </InputGroup>
   );
 };

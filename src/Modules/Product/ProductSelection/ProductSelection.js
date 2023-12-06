@@ -25,7 +25,7 @@ const Product = (props) => {
   const addToCart = async () => {
     console.log("current is ", current);
     await axios
-      .post(`http://192.168.1.26:5000/cart/${user.user._id}/add`, {
+      .post(`http://192.168.1.217:5000/cart/${user.user._id}/add`, {
         productId: current._id,
         quantity: 1,
         color: prod.color,

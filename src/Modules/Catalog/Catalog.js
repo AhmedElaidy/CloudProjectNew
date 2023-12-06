@@ -17,38 +17,60 @@ const Catalog = () => {
   const [color, setColor] = useState("");
   const [products, setProducts] = useState([]);
   const submitFilter = () => {
-    let url = "http://192.168.1.26:5000/products";
+    let url = "http://192.168.1.217:5000/products";
 
     // Check each condition and append query parameters if they are true
     if (typeFilter) {
-      url += `/filter/${typeFilter}`;
-    }
-
-    if (!typeFilter) {
-      url += `/filter/men`;
+      if (typeFilter != "all") {
+        url += `/filter/${typeFilter}`;
+      }
     }
 
     if (subCategory) {
-      url += `/${subCategory}`;
+      url.includes("filter")
+        ? (url += `/${subCategory}`)
+        : (url += `/filter/${subCategory}`);
     }
 
     if (color) {
       // If there are already parameters in the URL, use '&' for subsequent parameters
-      url += url.includes("?") ? `&color=${color}` : `?color=${color}`;
+      url.includes("filter")
+        ? (url += url.includes("?") ? `&color=${color}` : `?color=${color}`)
+        : (url += url.includes("?")
+            ? `/filter/&color=${color}`
+            : `/filter/?color=${color}`);
+    }
+    if (searchQuery) {
+      // If there are already parameters in the URL, use '&' for subsequent parameters
+      url.includes("filter")
+        ? (url += url.includes("?")
+            ? `&searchQuery=${searchQuery}`
+            : `?searchQuery=${searchQuery}`)
+        : (url += url.includes("?")
+            ? `/filter/&searchQuery=${searchQuery}`
+            : `/filter/?searchQuery=${searchQuery}`);
     }
 
     if (valueMax) {
-      url += url.includes("?")
-        ? `&maxPrice=${valueMax}`
-        : `?maxPrice=${valueMax}`;
+      url.includes("filter")
+        ? (url += url.includes("?")
+            ? `&maxPrice=${valueMax}`
+            : `?maxPrice=${valueMax}`)
+        : (url += url.includes("?")
+            ? `/filter/&maxPrice=${valueMax}`
+            : `/filter/?maxPrice=${valueMax}`);
     }
 
     if (valueMin) {
-      url += url.includes("?")
-        ? `&minPrice=${valueMin}`
-        : `?minPrice=${valueMin}`;
+      url.includes("filter")
+        ? (url += url.includes("?")
+            ? `&minPrice=${valueMin}`
+            : `?minPrice=${valueMin}`)
+        : (url += url.includes("?")
+            ? `/filter/&minPrice=${valueMin}`
+            : `/filter/?minPrice=${valueMin}`);
     }
-
+    console.log("new url is ", url);
     getProducts(url);
   };
 
@@ -74,21 +96,22 @@ const Catalog = () => {
 
   useEffect(() => {
     console.log("inside useEffect of typeFilter subCategory");
-    let url = "http://192.168.1.26:5000/products";
-    
+    let url = "http://192.168.1.217:5000/products";
+    console.log("typeFilter is ", typeFilter);
+
     if (typeFilter) {
-      url += `/filter/${typeFilter}`;
+      if (typeFilter != "all") {
+        url += `/filter/${typeFilter}`;
+      }
     }
-    
-    if (!typeFilter) {
-      url += `/filter/men`;
-    }
-    
+
     if (subCategory) {
-      url += `/${subCategory}`;
+      url.includes("filter")
+        ? (url += `/${subCategory}`)
+        : (url += `/filter/${subCategory}`);
     }
-    
-    console.log("url is ",url);
+
+    console.log("new url is ", url);
     getProducts(url);
   }, [typeFilter, subCategory]);
 

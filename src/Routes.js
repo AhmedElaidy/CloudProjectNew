@@ -11,6 +11,7 @@ import PendingDesigns from "Modules/Admin/PendingDesigns";
 import MyDesigns from "Modules/MyDesigns";
 import AddProduct from "Modules/Admin/AddProduct/PendingDesigns/AddProduct";
 import CreateDesign from "Modules/MyDesigns/CreateDesign";
+import EditProfile from "Modules/Authentication/EditProfile/EditProfile";
 
 const Redirection = () => {
   return <Redirect to={Url.HOME} />;
@@ -61,6 +62,11 @@ const routes = [
     path: Url.PendingDesigns,
     exact: true,
     component: PendingDesigns,
+  },
+  {
+    path: Url.EditProfile,
+    exact: true,
+    component: EditProfile,
   },
   {
     path: Url.UpdateProduct,

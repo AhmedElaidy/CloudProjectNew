@@ -2,6 +2,7 @@ const Url = {
   BASE: "/",
   HOME: "/clothingstore",
   Auth: "/clothingstore/auth",
+  EditProfile: "/clothingstore/edit-profile",
   Product: "/clothingstore/product/:id",
   Catalog: "/clothingstore/products",
   Cart: "/clothingstore/cart",

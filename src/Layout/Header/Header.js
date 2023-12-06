@@ -15,9 +15,9 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Header = () => {
   const history = useHistory();
+  const { cart, typeFilter, setTypeFilter } = UseStore();
   const classes = useStyles();
 
-  const { cart, typeFilter, setTypeFilter } = UseStore();
   const userContext = useContext(AuthContext);
   const { userRole } = userContext.user;
 
@@ -37,6 +37,14 @@ const Header = () => {
   const RegularUserLinks = () => {
     return (
       <Fragment>
+        <p
+          onClick={() => {
+            onRegularLinksClick("all");
+          }}
+          className={clsx(classes.navLink)}
+        >
+          All
+        </p>
         <p
           onClick={() => {
             onRegularLinksClick("men");
@@ -116,13 +124,17 @@ const Header = () => {
                 {userRole.toLowerCase() === "admin" ? (
                   <NavLink linkAdress="/add-product">
                     <img
-                      src={`${process.env.PUBLIC_URL}/icons/logo/logo.svg`}
+                      src={`https://s3.amazonaws.com/thumbnails.venngage.com/template/fc8535df-be09-4c80-8ea5-a69a34b2318e.png`}
+                      width={50}
+                      height={50}
                     />
                   </NavLink>
                 ) : (
                   <NavLink linkAdress="/">
                     <img
-                      src={`${process.env.PUBLIC_URL}/icons/logo/logo.svg`}
+                      src={`https://s3.amazonaws.com/thumbnails.venngage.com/template/fc8535df-be09-4c80-8ea5-a69a34b2318e.png`}
+                      width={50}
+                      height={50}
                     />
                   </NavLink>
                 )}
@@ -154,6 +166,14 @@ const Header = () => {
                 xs={12}
                 lg={3}
               >
+                {userRole == "regular" && (
+                  <NavLink linkAdress="/edit-profile">
+                    <IconText
+                      icon="/icons/user/userGrey.svg"
+                      text="Edit Profile"
+                    />
+                  </NavLink>
+                )}
                 <div
                   onClick={handleLogut}
                   className="mr-2"
@@ -223,8 +243,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.5rem 1rem",
     fontSize: "18px",
     lineHeight: "28px",
-    cursor: "pointer"
-
+    cursor: "pointer",
   },
 }));
 

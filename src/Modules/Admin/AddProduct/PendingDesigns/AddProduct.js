@@ -35,56 +35,51 @@ const AddProduct = () => {
   };
 
   const onInputChange = (e) => {
-    if (e.target.name == 'img'){
+    if (e.target.name == "img") {
       setProduct((oldProduct) => {
         return { ...oldProduct, img: e.target.files[0] };
       });
-    }else{
+    } else {
       setProduct((oldProduct) => {
         return { ...oldProduct, [e.target.name]: e.target.value };
       });
     }
   };
 
-
-  
-  
-
   const handleAddDesign = (e) => {
     e.preventDefault();
-  
+
     const formData = new FormData();
-    formData.append('img', product.img);
-    formData.append('name', product.name);
-    formData.append('color', product.color);
-    formData.append('category', product.category);
-    formData.append('subCategory', product.subCategory);
-    formData.append('price', product.price);
-    formData.append('desc', product.desc);
-    formData.append('userRole', userRole);
-  
+    formData.append("img", product.img);
+    formData.append("name", product.name);
+    formData.append("color", product.color);
+    formData.append("category", product.category);
+    formData.append("subCategory", product.subCategory);
+    formData.append("price", product.price);
+    formData.append("desc", product.desc);
+    formData.append("userRole", userRole);
+
     axios
-      .post('http://192.168.1.26:5000/products', formData, {
+      .post("http://192.168.1.217:5000/products", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       })
       .then(() => {
         setProduct({
-          name: '',
-          color: '',
-          category: '',
-          subCategory: '',
+          name: "",
+          color: "",
+          category: "",
+          subCategory: "",
           price: 0,
-          img: '',
-          desc: '',
+          img: "",
+          desc: "",
         });
       })
       .catch((error) => {
-        console.error('Error adding product', error);
+        console.error("Error adding product", error);
       });
   };
-  
 
   const CategoryChoice = () => {
     const categoryOptions = [
@@ -206,64 +201,71 @@ const AddProduct = () => {
       }, 3000);
     }
   }, [isDataNotCompleted]);
-  return (
-    <Fragment>
-      {isDataNotCompleted && (
-        <h5 style={{ color: "red", textAlign: "center" }}>
-          !Please Be Sure To Fill All The Fields
-        </h5>
-      )}
-      <div className="d-flex justify-content-center">
-        <form
-          onSubmit={handleAddDesign}
-          className="w-50"
-          style={{ minWidth: "250px" }}
-        >
-          <InputField
-            placeholder="Name"
-            value={product.name}
-            name="name"
-            onChange={onInputChange}
-            required
-          />
-          <div className="d-flex justify-content-around">
-            <ColorChoice />
-            <CategoryChoice />
-            <SubCategoryChoice />
-          </div>
-          <InputField
-            placeholder="Price"
-            value={product.price}
-            name="price"
-            type="number"
-            onChange={onInputChange}
-            required
-          />
-          <InputField
-            placeholder="Img Link"
-            name="img"
-            onChange={onInputChange}
-            type="file"
-            accept="image/*"
-            required
-          />
-          <InputField
-            placeholder="Description"
-            value={product.desc}
-            name="desc"
-            type="text"
-            onChange={onInputChange}
-            required
-          />
-          <ButtonBlock
-            type="submit"
-            text="Add Product"
-            style={{ margin: "15px 0" }}
-          />
-        </form>
-      </div>
-    </Fragment>
-  );
+
+  if (userRole?.toLowerCase() !== "admin") {
+    return (
+      <h3 className="text-center"> You Are Not Authorized To See This Page</h3>
+    );
+  } else {
+    return (
+      <Fragment>
+        {isDataNotCompleted && (
+          <h5 style={{ color: "red", textAlign: "center" }}>
+            !Please Be Sure To Fill All The Fields
+          </h5>
+        )}
+        <div className="d-flex justify-content-center">
+          <form
+            onSubmit={handleAddDesign}
+            className="w-50"
+            style={{ minWidth: "250px" }}
+          >
+            <InputField
+              placeholder="Name"
+              value={product.name}
+              name="name"
+              onChange={onInputChange}
+              required
+            />
+            <div className="d-flex justify-content-around">
+              <ColorChoice />
+              <CategoryChoice />
+              <SubCategoryChoice />
+            </div>
+            <InputField
+              placeholder="Price"
+              value={product.price}
+              name="price"
+              type="number"
+              onChange={onInputChange}
+              required
+            />
+            <InputField
+              placeholder="Img Link"
+              name="img"
+              onChange={onInputChange}
+              type="file"
+              accept="image/*"
+              required
+            />
+            <InputField
+              placeholder="Description"
+              value={product.desc}
+              name="desc"
+              type="text"
+              onChange={onInputChange}
+              required
+            />
+            <ButtonBlock
+              type="submit"
+              text="Add Product"
+              style={{ margin: "15px 0" }}
+            />
+          </form>
+        </div>
+      </Fragment>
+    );
+  }
 };
 
 export default AddProduct;

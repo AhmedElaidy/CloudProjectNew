@@ -6,8 +6,12 @@ import clsx from "clsx";
 import InputField from "Components/InputField";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import AuthContext from "Store/AuthContext";
 
-const Register = () => {
+const EditProfile = () => {
+  const authinticatedUser = useContext(AuthContext);
+  const id = authinticatedUser.user._id;
+  console.log("_id is ", id);
   const history = useHistory();
   const classes = useStyles();
   const [user, setUser] = useState({
@@ -52,7 +56,7 @@ const Register = () => {
       isValid(user.phoneNumber)
     ) {
       axios
-        .post(
+        .put(
           "http://192.168.1.217:5000/auth/signup",
           {
             fullName: user.fullName,
@@ -96,6 +100,16 @@ const Register = () => {
       }, 3000);
     }
   }, [isDataNotCompleted]);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      await axios.get(`http://192.168.1.217:5000/users/${id}`).then((res) => {
+        console.log("res is ", res);
+        // setUserInitialData here after getting it from the request
+      });
+    };
+    getUserData();
+  }, []);
   return (
     <Container
       className={clsx(classes.login, {
@@ -173,7 +187,11 @@ const Register = () => {
             Designer (Checked Means You Are A Designer)
           </label>
         </div>
-        <ButtonBlock text="Register" type="submit" />
+        <ButtonBlock
+          text="Register"
+          type="submit"
+          style={{ marginBottom: "10px" }}
+        />
       </form>
     </Container>
   );
@@ -192,4 +210,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default Register;
+export default EditProfile;
