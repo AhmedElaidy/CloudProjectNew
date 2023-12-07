@@ -13,6 +13,7 @@ import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 const AddProduct = () => {
   const userContext = useContext(AuthContext);
   const { id, userRole } = userContext.user;
+  const  user = useContext(AuthContext);
   const [product, setProduct] = useState({
     name: "",
     color: "",
@@ -25,6 +26,7 @@ const AddProduct = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const [isDataNotCompleted, setIsDataNotCompleted] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const isValid = (word) => {
     if (word.trim()) {
@@ -60,7 +62,7 @@ const AddProduct = () => {
     formData.append("userRole", userRole);
 
     axios
-      .post("http://192.168.1.217:5000/products", formData, {
+      .post(`${process.env.REACT_APP_SERVER_ENDPOINT}/products`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -75,6 +77,7 @@ const AddProduct = () => {
           img: "",
           desc: "",
         });
+        setIsSuccess(true); 
       })
       .catch((error) => {
         console.error("Error adding product", error);
@@ -194,15 +197,22 @@ const AddProduct = () => {
       </Dropdown>
     );
   };
+  
+  
   useEffect(() => {
-    if (isDataNotCompleted) {
-      setTimeout(() => {
+    if (isDataNotCompleted || isSuccess) {
+      const timer = setTimeout(() => {
         setIsDataNotCompleted(false);
+        setIsSuccess(false);
       }, 3000);
-    }
-  }, [isDataNotCompleted]);
 
-  if (userRole?.toLowerCase() !== "admin") {
+      return () => clearTimeout(timer);
+    }
+  }, [isDataNotCompleted, isSuccess]);
+
+
+
+  if (user.user.userRole?.toLowerCase() !== "admin") {
     return (
       <h3 className="text-center"> You Are Not Authorized To See This Page</h3>
     );
@@ -212,6 +222,11 @@ const AddProduct = () => {
         {isDataNotCompleted && (
           <h5 style={{ color: "red", textAlign: "center" }}>
             !Please Be Sure To Fill All The Fields
+          </h5>
+        )}
+        {isSuccess && (
+          <h5 style={{ color: "green", textAlign: "center" }}>
+            Product Added Successfully
           </h5>
         )}
         <div className="d-flex justify-content-center">

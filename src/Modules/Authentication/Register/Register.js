@@ -53,7 +53,7 @@ const Register = () => {
     ) {
       axios
         .post(
-          "http://192.168.1.217:5000/auth/signup",
+          `${process.env.REACT_APP_SERVER_ENDPOINT}/auth/signup`,
           {
             fullName: user.fullName,
             email: user.email,

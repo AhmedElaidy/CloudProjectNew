@@ -50,28 +50,22 @@ const EditProfile = () => {
     if (
       isValid(user.address) &&
       isValid(user.city) &&
-      isValid(user.email) &&
       isValid(user.fullName) &&
-      isValid(user.password) &&
       isValid(user.phoneNumber)
     ) {
       axios
         .put(
-          "http://192.168.1.217:5000/auth/signup",
+          `${process.env.REACT_APP_SERVER_ENDPOINT}/users/${id}`,
           {
             fullName: user.fullName,
             email: user.email,
-            password: user.password,
             phoneNumber: user.phoneNumber,
             city: user.city,
             address: user.address,
-            isAdmin: false,
-            isDesigner: user.isDesigner,
           },
           {
             headers: {
               "Content-Type": "application/json",
-              // Add other headers if needed
             },
           }
         )
@@ -79,11 +73,9 @@ const EditProfile = () => {
           setUser({
             fullName: "",
             email: "",
-            password: "",
             phoneNumber: "",
             city: "",
             address: "",
-            isDesigner: false,
           });
           history.push("/");
         });
@@ -103,11 +95,23 @@ const EditProfile = () => {
 
   useEffect(() => {
     const getUserData = async () => {
-      await axios.get(`http://192.168.1.217:5000/users/${id}`).then((res) => {
-        console.log("res is ", res);
-        // setUserInitialData here after getting it from the request
-      });
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_ENDPOINT}/users/${id}`);
+        const userData = response.data.user;
+        console.log("res is ", response);
+        setUser({
+          fullName: userData.fullName,
+          email: userData.email,
+          phoneNumber: userData.phoneNumber,
+          city: userData.city,
+          address: userData.address,
+        });
+      } catch (error) {
+        console.error('Error fetching user data', error);
+      }
     };
+    
+    // Call the function
     getUserData();
   }, []);
   return (
@@ -137,22 +141,15 @@ const EditProfile = () => {
           type="email"
           maxLength={40}
           value={user.email}
-        />
-        <InputField
-          required
-          placeholder="Password"
-          name="password"
-          onChange={onInputChange}
-          type="password"
-          maxLength={20}
-          value={user.password}
+          style={{ color: 'gray' }}
+          disabled={true}
         />
         <InputField
           required
           placeholder="Phone Number"
           name="phoneNumber"
           onChange={onInputChange}
-          type="number"
+          type="text"
           max={100000000000000}
           value={user.phoneNumber}
         />
@@ -175,20 +172,11 @@ const EditProfile = () => {
           value={user.address}
         />
         <div className="mt-4  mb-3 d-flex ml-4">
-          <input
-            required
-            className="form-check-input"
-            type="checkbox"
-            id="designerCheckbox"
-            checked={user.isDesigner}
-            onChange={handleCheckboxChange}
-          />
-          <label className="form-check-label" htmlFor="designerCheckbox">
-            Designer (Checked Means You Are A Designer)
-          </label>
+        
+          
         </div>
         <ButtonBlock
-          text="Register"
+          text="Update"
           type="submit"
           style={{ marginBottom: "10px" }}
         />

@@ -34,11 +34,10 @@ const Login = () => {
   };
 
   const handleLogin = (e) => {
-    console.log("process.env is ", process.env);
     e.preventDefault();
     if (isValid(user.email) && isValid(user.password)) {
       axios
-        .post(`http://192.168.1.217:5000/auth/login`, {
+        .post(`${process.env.REACT_APP_SERVER_ENDPOINT}/auth/login`, {
           email: user.email,
           password: user.password,
         })
@@ -47,14 +46,13 @@ const Login = () => {
             email: "",
             password: "",
           });
-          console.log(res.data);
+  
           const userRole = res.data.admin
             ? "admin"
             : res.data.designer
             ? "designer"
             : "regular";
-
-          console.log("userRole is ", userRole);
+  
           authContext.login(
             res.data._id ? res.data._id : "",
             res.data.email,
@@ -64,13 +62,22 @@ const Login = () => {
           setTimeout(() => {
             history.push("/clothingstore");
           }, 0);
-
-          console.log("/clothingstore/products");
+        })
+        .catch((error) => {
+          if (
+            error.response &&
+            (error.response.data.error ===
+              "Cannot read properties of null (reading 'password')" ||
+              error.response.data.error === "Invalid Credentials")
+          ) {
+            setIsSomethingWrong(true);
+          }
         });
     } else {
       setIsSomethingWrong(true);
     }
   };
+  
 
   useEffect(() => {
     if (isSomethingWrong) {

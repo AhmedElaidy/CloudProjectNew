@@ -9,9 +9,9 @@ import AuthContext from "Store/AuthContext";
 
 const MyDesigns = () => {
   const { MyDesigns } = useStore();
-  const { userRole } = useContext(AuthContext);
+  const user = useContext(AuthContext);
 
-  if (userRole?.toLowerCase() !== "designer") {
+  if (user.user.userRole?.toLowerCase() !== "designer") {
     return (
       <h3 className="text-center"> You Are Not Authorized To See This Page</h3>
     );

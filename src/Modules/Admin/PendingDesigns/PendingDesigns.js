@@ -6,12 +6,12 @@ import axios from "axios";
 import AuthContext from "Store/AuthContext";
 
 const PendingDesigns = () => {
-  const { userRole } = useContext(AuthContext);
+  const user = useContext(AuthContext);
   const [pendingDesigns, setPendingDesigns] = useState([]);
 
   const generatePendingProducts = async () => {
     await axios
-      .get(`http://192.168.1.217:5000/products/pending`)
+      .get(`${process.env.REACT_APP_SERVER_ENDPOINT}/products/pending`)
       .then((response) => {
         console.log("response is ", response);
         setPendingDesigns(response.data.products);
@@ -25,7 +25,7 @@ const PendingDesigns = () => {
     generatePendingProducts();
   }, []);
 
-  if (userRole?.toLowerCase() !== "admin") {
+  if (user.user.userRole?.toLowerCase() !== "admin") {
     return (
       <h3 className="text-center"> You Are Not Authorized To See This Page</h3>
     );

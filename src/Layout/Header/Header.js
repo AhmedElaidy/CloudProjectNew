@@ -95,6 +95,7 @@ const Header = () => {
     if (userRole?.toLowerCase() === "admin") {
       return (
         <Fragment>
+          <RegularUserLinks />
           <NavLink linkAdress="/add-product">Add Product</NavLink>
           <NavLink linkAdress="/pending-designs">Pending Designs</NavLink>
         </Fragment>
@@ -122,7 +123,7 @@ const Header = () => {
                 lg={3}
               >
                 {userRole.toLowerCase() === "admin" ? (
-                  <NavLink linkAdress="/add-product">
+                  <NavLink linkAdress="/">
                     <img
                       src={`https://s3.amazonaws.com/thumbnails.venngage.com/template/fc8535df-be09-4c80-8ea5-a69a34b2318e.png`}
                       width={50}
@@ -166,7 +167,7 @@ const Header = () => {
                 xs={12}
                 lg={3}
               >
-                {userRole == "regular" && (
+                {(userRole == "regular" || userRole == "designer")  && (
                   <NavLink linkAdress="/edit-profile">
                     <IconText
                       icon="/icons/user/userGrey.svg"

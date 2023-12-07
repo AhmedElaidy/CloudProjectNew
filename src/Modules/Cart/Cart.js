@@ -11,7 +11,7 @@ import AuthContext from "Store/AuthContext";
 
 const Cart = () => {
   const { cart, setSubTotal } = UseStore();
-  const { userRole } = useContext(AuthContext);
+  const  user = useContext(AuthContext);
 
   useEffect(() => {
     let localSubTotal = 0;
@@ -26,7 +26,8 @@ const Cart = () => {
     setSubTotal(localSubTotal.toFixed(2));
   });
 
-  if (userRole?.toLowerCase() !== "regular") {
+  
+  if (user.user.userRole?.toLowerCase() !== "regular") {
     return (
       <h3 className="text-center"> You Are Not Authorized To See This Page</h3>
     );

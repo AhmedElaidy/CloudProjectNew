@@ -18,7 +18,7 @@ const Product = () => {
   const [product, setProduct] = useState();
 
   useEffect(() => {
-    let url = `http://192.168.1.217:5000/products/product/${id}`;
+    let url = `${process.env.REACT_APP_SERVER_ENDPOINT}/products/product/${id}`;
     const getProduct = async (url) => {
       await axios
         .get(url)

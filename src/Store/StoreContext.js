@@ -54,7 +54,7 @@ export const StoreContextProvider = ({ children }) => {
   const getCurrentCart = async () => {
     console.log("inside get Current cart");
     await axios
-      .get(`http://192.168.1.217:5000/cart/${user.user._id}`)
+      .get(`${process.env.REACT_APP_SERVER_ENDPOINT}/cart/${user.user._id}`)
       .then((response) => {
         console.log("response is ", response.data);
         console.log("response is ", response.data.cart.products);

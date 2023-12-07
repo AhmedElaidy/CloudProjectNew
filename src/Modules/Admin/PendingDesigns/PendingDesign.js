@@ -12,13 +12,13 @@ const PendingDesign = (props) => {
 
   console.log("props are ", props);
   const approveDesign = async () => {
-    await axios.put(`http://192.168.1.217:5000/products/${_id} `, {
+    await axios.put(`${process.env.REACT_APP_SERVER_ENDPOINT}/products/${_id} `, {
       status: "approved",
     });
     props.generatePendingProducts();
   };
   const declineDesign = async () => {
-    await axios.delete(`http://192.168.1.217:5000/products/${_id}`);
+    await axios.delete(`${process.env.REACT_APP_SERVER_ENDPOINT}/products/${_id}`);
     props.generatePendingProducts();
   };
   return (
@@ -30,8 +30,8 @@ const PendingDesign = (props) => {
       <img
         style={{ boxShadow: "0px 0px 3px 1px #cbcbcb" }}
         className="w-100 border-rounded p-3"
-        src={img}
-        alt="product img"
+        src={`data:image/jpeg;base64,${img}`}
+        alt="Product Img"
       />
       <div
         className={`${classes.textContainer} d-flex justify-content-between mt-2 mb-2 mr-1 ml-1`}

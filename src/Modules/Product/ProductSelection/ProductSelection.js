@@ -25,7 +25,7 @@ const Product = (props) => {
   const addToCart = async () => {
     console.log("current is ", current);
     await axios
-      .post(`http://192.168.1.217:5000/cart/${user.user._id}/add`, {
+      .post(`${process.env.REACT_APP_SERVER_ENDPOINT}/cart/${user.user._id}/add`, {
         productId: current._id,
         quantity: 1,
         color: prod.color,
@@ -73,7 +73,8 @@ const Product = (props) => {
         shirtGraphics={prod.graphics}
         setShirtGraphics={setGraphics}
       />
-      <div className="mt-4 ">
+       <div className="mt-4 ">
+      {user.user.userRole !== 'admin' && user.user.userRole !== 'designer' ? (
         <div className={classes.addToCartButton}>
           <ButtonBlock
             onClick={addToCart}
@@ -81,7 +82,10 @@ const Product = (props) => {
             text="Add to Cart"
           />
         </div>
-      </div>
+      ) : (
+        <p>You cannot add to cart.</p>
+      )}
+    </div>
     </div>
   );
 };
