@@ -9,22 +9,14 @@ const DesignedProduct = (props) => {
   const { img, price, name, link } = props;
   return (
     <Link
-      to={`${Url.HOME}/my-designs/create/${link}`}
+    to={`${Url.HOME}/product/${link}`}
       className={clsx(classes.product, {
-        "w-100 h-100 ": true,
-      })}
-    >
-      <img
-        style={{ boxShadow: "0px 0px 3px 1px #cbcbcb" }}
-        className="w-100 border-rounded p-3"
-        src={img}
-        alt="product img"
-      />
-      <div
-        className={`${classes.textContainer} d-flex justify-content-between mt-2 mb-2 mr-1 ml-1`}
-      >
-        <h5 className="mt-1">{name}</h5>
-        <h6 className="mt-2">{price}$</h6>
+        'w-100 h-100 ': true
+      })}>
+      <img className='w-100 border-rounded' src={`data:image/jpeg;base64,${img}`} alt="Product" />
+      <div className={classes.textContainer}>
+        <h5 className='mt-1'>{name}</h5>
+        <h6 className='mt-2'>{price}$</h6>
       </div>
     </Link>
   );

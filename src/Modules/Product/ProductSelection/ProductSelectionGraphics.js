@@ -5,27 +5,27 @@ const ProductSelectionGraphics = ({ shirtGraphics, setShirtGraphics }) => {
 
   const imgs = [
     {
-      src: "https://i.ibb.co/48Vy78K/580b57fcd9996e24bc43c51f.png",
-      alt: "google logo",
-      width: 100,
-      height: 50,
-    },
-    {
-      src: "https://i.ibb.co/8sc4PkL/microsoft-centered-logo.png",
-      alt: "microsoft logo",
-      width: 100,
-      height: 50,
-    },
-    {
-      src: "https://i.ibb.co/ypk8Xgg/chrome-google-logo-social-icon-4.png",
-      alt: "google logo",
+      src: "https://www.freepnglogos.com/uploads/adidas-logo-png-hd-17.png",
+      alt: "Adidas",
       width: 100,
       height: 100,
     },
     {
-      src: "https://i.ibb.co/VgCvZ4R/pngimg-com-apple-logo-PNG19688.png",
-      alt: "apple logo",
-      width: 130,
+      src: "https://branditechture.agency/brand-logos/wp-content/uploads/2022/06/Calvin-Klein-1024x768.jpg",
+      alt: "Calvin Klein",
+      width: 100,
+      height: 100,
+    },
+    {
+      src: "https://static.nike.com/a/images/f_jpg,q_auto:eco/61b4738b-e1e1-4786-8f6c-26aa0008e80b/swoosh-logo-black.png",
+      alt: "Nike",
+      width: 100,
+      height: 100,
+    },
+    {
+      src: "https://logowik.com/content/uploads/images/731_poloralphlauren.jpg",
+      alt: "Polo",
+      width: 100,
       height: 100,
     },
   ];
